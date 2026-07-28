@@ -1,33 +1,55 @@
-import { createContext, useContext, useEffect, useState } from "react";
+
+import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(() => {
-    const savedUser = localStorage.getItem("user");
 
-    return savedUser
-      ? JSON.parse(savedUser)
-      : null;
+  // ================= LOAD USER =================
+
+  const [user, setUser] = useState(() => {
+    const savedUser = sessionStorage.getItem("user");
+
+    if (savedUser) {
+      try {
+        return JSON.parse(savedUser);
+      } catch (error) {
+        console.error(
+          "Failed to load user:",
+          error
+        );
+
+        sessionStorage.removeItem("user");
+        return null;
+      }
+    }
+
+    return null;
   });
 
+
+  // ================= LOAD TOKEN =================
+
   const [token, setToken] = useState(() => {
-    return localStorage.getItem("token") || null;
+    return sessionStorage.getItem("token") || null;
   });
 
 
   // ================= LOGIN =================
 
   const login = (userData, userToken) => {
+
     setUser(userData);
     setToken(userToken);
 
-    localStorage.setItem(
+    // Save user for current browser session
+    sessionStorage.setItem(
       "user",
       JSON.stringify(userData)
     );
 
-    localStorage.setItem(
+    // Save token for current browser session
+    sessionStorage.setItem(
       "token",
       userToken
     );
@@ -37,38 +59,24 @@ export function AuthProvider({ children }) {
   // ================= LOGOUT =================
 
   const logout = () => {
+
     setUser(null);
     setToken(null);
 
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
+    // Remove session data
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("token");
   };
 
 
   // ================= CHECK LOGIN =================
 
-  const isAuthenticated = !!user && !!token;
+  const isAuthenticated =
+    !!user &&
+    !!token;
 
 
-  // ================= SYNC USER =================
-
-  useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-
-    if (savedUser) {
-      try {
-        setUser(JSON.parse(savedUser));
-      } catch (error) {
-        console.error(
-          "Failed to load user:",
-          error
-        );
-
-        localStorage.removeItem("user");
-      }
-    }
-  }, []);
-
+  // ================= AUTH PROVIDER =================
 
   return (
     <AuthContext.Provider
