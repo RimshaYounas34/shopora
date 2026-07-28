@@ -13,11 +13,11 @@ function OrderSummary() {
   const total = subtotal + shipping - discount;
 
   return (
-    <div className="bg-white rounded-3xl shadow-sm p-8">
+    <div className="bg-white rounded-2xl sm:rounded-3xl shadow-sm p-5 sm:p-6 md:p-8">
 
       {/* Heading */}
 
-      <h2 className="text-2xl font-bold text-gray-800 mb-8">
+      <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-6 sm:mb-8">
         Order Summary
       </h2>
 
@@ -26,17 +26,17 @@ function OrderSummary() {
 
       {cartItems.length === 0 ? (
 
-        <div className="text-center py-8">
+        <div className="text-center py-6 sm:py-8">
 
-          <div className="text-5xl mb-4">
+          <div className="text-4xl sm:text-5xl mb-4">
             🛒
           </div>
 
-          <h3 className="text-lg font-semibold text-gray-800">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-800">
             Your Cart is Empty
           </h3>
 
-          <p className="text-gray-500 mt-2">
+          <p className="text-gray-500 text-sm sm:text-base mt-2 leading-6">
             Add some products before placing an order.
           </p>
 
@@ -44,23 +44,23 @@ function OrderSummary() {
 
       ) : (
 
-        <div className="space-y-5">
+        <div className="space-y-4 sm:space-y-5">
 
           {cartItems.map((item) => (
 
             <div
               key={item.id}
-              className="flex items-center gap-4 border-b pb-5"
+              className="flex items-center gap-3 sm:gap-4 border-b pb-4 sm:pb-5"
             >
 
               {/* Product Image */}
 
-              <div className="w-20 h-20 bg-gray-100 rounded-xl overflow-hidden flex-shrink-0">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-100 rounded-lg sm:rounded-xl overflow-hidden flex-shrink-0">
 
                 <img
                   src={item.image}
                   alt={item.name || item.title}
-                  className="w-full h-full object-contain p-2"
+                  className="w-full h-full object-contain p-1.5 sm:p-2"
                 />
 
               </div>
@@ -70,15 +70,15 @@ function OrderSummary() {
 
               <div className="flex-1 min-w-0">
 
-                <h4 className="font-semibold text-gray-800 truncate">
+                <h4 className="font-semibold text-gray-800 text-sm sm:text-base truncate">
                   {item.name || item.title}
                 </h4>
 
-                <p className="text-gray-500 text-sm mt-1">
+                <p className="text-gray-500 text-xs sm:text-sm mt-1">
                   Qty: {item.quantity}
                 </p>
 
-                <p className="text-gray-500 text-sm">
+                <p className="text-gray-500 text-xs sm:text-sm">
                   ${Number(item.price).toFixed(2)} each
                 </p>
 
@@ -87,9 +87,9 @@ function OrderSummary() {
 
               {/* Product Total */}
 
-              <div className="text-right">
+              <div className="text-right flex-shrink-0">
 
-                <p className="font-bold text-green-600">
+                <p className="font-bold text-green-600 text-sm sm:text-base">
                   $
                   {(
                     Number(item.price) * item.quantity
@@ -111,11 +111,11 @@ function OrderSummary() {
 
       {cartItems.length > 0 && (
 
-        <div className="mt-8 space-y-4">
+        <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
 
           {/* Subtotal */}
 
-          <div className="flex justify-between text-gray-600">
+          <div className="flex justify-between items-center gap-4 text-sm sm:text-base text-gray-600">
 
             <span>
               Subtotal
@@ -130,7 +130,7 @@ function OrderSummary() {
 
           {/* Shipping */}
 
-          <div className="flex justify-between text-gray-600">
+          <div className="flex justify-between items-center gap-4 text-sm sm:text-base text-gray-600">
 
             <span>
               Shipping
@@ -145,7 +145,7 @@ function OrderSummary() {
 
           {/* Discount */}
 
-          <div className="flex justify-between text-gray-600">
+          <div className="flex justify-between items-center gap-4 text-sm sm:text-base text-gray-600">
 
             <span>
               Discount
@@ -160,13 +160,13 @@ function OrderSummary() {
 
           {/* Total */}
 
-          <div className="flex justify-between items-center border-t pt-5 mt-5">
+          <div className="flex justify-between items-center gap-4 border-t pt-4 sm:pt-5 mt-4 sm:mt-5">
 
-            <span className="text-xl font-bold text-gray-800">
+            <span className="text-lg sm:text-xl font-bold text-gray-800">
               Total
             </span>
 
-            <span className="text-2xl font-bold text-green-600">
+            <span className="text-xl sm:text-2xl font-bold text-green-600">
               ${total.toFixed(2)}
             </span>
 

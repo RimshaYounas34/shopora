@@ -1,8 +1,10 @@
+
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Newsletter from "../components/Newsletter";
+
 import {
   FaMapMarkerAlt,
   FaPhoneAlt,
@@ -76,187 +78,189 @@ function Contact() {
   return (
     <>
       <Navbar />
-{/* Premium Contact Banner */}
 
-<section className="relative overflow-hidden bg-gradient-to-r from-orange-50 via-white to-green-50 border-b">
+      {/* ================= CONTACT BANNER ================= */}
 
-  {/* Background Blur */}
-  <div className="absolute -top-24 -left-24 w-72 h-72 bg-green-200/30 rounded-full blur-3xl"></div>
-  <div className="absolute -bottom-24 -right-24 w-72 h-72 bg-orange-200/30 rounded-full blur-3xl"></div>
+      <section className="relative overflow-hidden bg-gradient-to-r from-orange-50 via-white to-green-50 border-b">
 
-  <div className="relative max-w-7xl mx-auto px-4">
+        <div className="absolute -top-24 -left-24 w-56 sm:w-72 h-56 sm:h-72 bg-green-200/30 rounded-full blur-3xl"></div>
 
-    <div className="grid lg:grid-cols-2 items-center py-5">
+        <div className="absolute -bottom-24 -right-24 w-56 sm:w-72 h-56 sm:h-72 bg-orange-200/30 rounded-full blur-3xl"></div>
 
-      {/* Left Side */}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-      <div>
+          <div className="grid lg:grid-cols-2 items-center gap-10 lg:gap-16 py-10 sm:py-14 lg:py-16">
 
-        <span className="inline-flex items-center px-4 py-2 rounded-full bg-green-100 text-green-700 text-sm font-semibold">
-          📞 Contact Support
-        </span>
+            {/* Left Side */}
 
-        <h1 className="mt-4 text-5xl font-extrabold text-gray-900">
-          Get In
-          <span className="text-green-600"> Touch</span>
-        </h1>
+            <div className="text-center lg:text-left">
 
-        <p className="mt-4 text-gray-600 max-w-lg">
-          We'd love to hear from you. Whether you have a question, feedback,
-          or need support, our team is always here to help you.
-        </p>
+              <span className="inline-flex items-center px-4 py-2 rounded-full bg-green-100 text-green-700 text-xs sm:text-sm font-semibold">
+                📞 Contact Support
+              </span>
 
-        <div className="flex items-center gap-4 mt-6">
+              <h1 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight">
+                Get In
+                <span className="text-green-600"> Touch</span>
+              </h1>
 
-          <a
-  href="#contact-form"
-  className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition"
->
-  Contact Now
-</a>
+              <p className="mt-4 text-gray-600 text-sm sm:text-base leading-7 max-w-lg mx-auto lg:mx-0">
+                We'd love to hear from you. Whether you have a question,
+                feedback, or need support, our team is always here to help you.
+              </p>
 
-          <div className="text-sm text-gray-500">
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mt-6">
 
-            <span className="hover:text-green-600 cursor-pointer">
-              Home
-            </span>
+                <a
+                  href="#contact-form"
+                  className="w-full sm:w-auto text-center bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition"
+                >
+                  Contact Now
+                </a>
 
-            <span className="mx-2">/</span>
+                <div className="text-sm text-gray-500">
+                  <span>Home</span>
 
-            <span className="font-semibold text-green-600">
-              Contact
-            </span>
+                  <span className="mx-2">/</span>
+
+                  <span className="font-semibold text-green-600">
+                    Contact
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* Right Side */}
+
+            <div className="flex justify-center lg:justify-end">
+
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-md">
+
+                <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-5 text-center hover:-translate-y-2 transition">
+
+                  <h3 className="text-2xl sm:text-3xl">📧</h3>
+
+                  <p className="mt-2 font-semibold text-sm sm:text-base text-gray-800">
+                    Email Us
+                  </p>
+
+                  <span className="text-xs sm:text-sm text-gray-500">
+                    24/7 Support
+                  </span>
+
+                </div>
+
+                <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-5 text-center hover:-translate-y-2 transition">
+
+                  <h3 className="text-2xl sm:text-3xl">💬</h3>
+
+                  <p className="mt-2 font-semibold text-sm sm:text-base text-gray-800">
+                    Live Chat
+                  </p>
+
+                  <span className="text-xs sm:text-sm text-gray-500">
+                    Instant Help
+                  </span>
+
+                </div>
+
+                <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-5 text-center hover:-translate-y-2 transition">
+
+                  <h3 className="text-2xl sm:text-3xl">📍</h3>
+
+                  <p className="mt-2 font-semibold text-sm sm:text-base text-gray-800">
+                    Our Office
+                  </p>
+
+                  <span className="text-xs sm:text-sm text-gray-500">
+                    Lahore, Pakistan
+                  </span>
+
+                </div>
+
+                <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-5 text-center hover:-translate-y-2 transition">
+
+                  <h3 className="text-2xl sm:text-3xl">⏰</h3>
+
+                  <p className="mt-2 font-semibold text-sm sm:text-base text-gray-800">
+                    Working Hours
+                  </p>
+
+                  <span className="text-xs sm:text-sm text-gray-500">
+                    Mon - Sat
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
 
           </div>
 
         </div>
 
-      </div>
+      </section>
 
-      {/* Right Side */}
+      {/* ================= CONTACT SECTION ================= */}
 
-      <div className="flex justify-end">
+      <section className="bg-[#f8faf8] py-12 sm:py-16 lg:py-20">
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="bg-white rounded-2xl shadow-lg p-5 text-center hover:-translate-y-2 transition">
+          {/* Heading */}
 
-            <h3 className="text-3xl">📧</h3>
+          <div className="text-center mb-10 sm:mb-14">
 
-            <p className="mt-2 font-semibold text-gray-800">
-              Email Us
-            </p>
-
-            <span className="text-sm text-gray-500">
-              24/7 Support
-            </span>
-
-          </div>
-
-          <div className="bg-white rounded-2xl shadow-lg p-5 text-center hover:-translate-y-2 transition">
-
-            <h3 className="text-3xl">💬</h3>
-
-            <p className="mt-2 font-semibold text-gray-800">
-              Live Chat
-            </p>
-
-            <span className="text-sm text-gray-500">
-              Instant Help
-            </span>
-
-          </div>
-
-          <div className="bg-white rounded-2xl shadow-lg p-5 text-center hover:-translate-y-2 transition">
-
-            <h3 className="text-3xl">📍</h3>
-
-            <p className="mt-2 font-semibold text-gray-800">
-              Our Office
-            </p>
-
-            <span className="text-sm text-gray-500">
-              Lahore, Pakistan
-            </span>
-
-          </div>
-
-          <div className="bg-white rounded-2xl shadow-lg p-5 text-center hover:-translate-y-2 transition">
-
-            <h3 className="text-3xl">⏰</h3>
-
-            <p className="mt-2 font-semibold text-gray-800">
-              Working Hours
-            </p>
-
-            <span className="text-sm text-gray-500">
-              Mon - Sat
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-      {/* Contact */}
-
-      <section className="bg-[#f8faf8] py-20">
-
-        <div className="max-w-7xl mx-auto px-6">
-
-          <div className="text-center mb-14">
-
-            <span className="text-green-600 uppercase tracking-[3px] font-semibold">
+            <span className="text-green-600 uppercase tracking-[2px] sm:tracking-[3px] text-sm font-semibold">
               Contact Information
             </span>
 
-            <h2 className="text-4xl font-bold text-gray-900 mt-3">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mt-3 leading-tight">
               Let's Start a Conversation
             </h2>
 
-            <p className="text-gray-500 mt-4 max-w-2xl mx-auto">
+            <p className="text-gray-500 mt-4 max-w-2xl mx-auto text-sm sm:text-base leading-7">
               Have any questions? Fill out the form and our team will get
               back to you within 24 hours.
             </p>
 
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-10">
+          {/* Contact Info + Form */}
 
-            {/* Left */}
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
 
-<div
-  id="contact-form"
-  className="bg-white rounded-3xl shadow-xl border border-green-100 p-10"
->
-              <h3 className="text-2xl font-bold mb-8">
+            {/* Contact Information */}
+
+            <div
+              id="contact-form"
+              className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-green-100 p-6 sm:p-8 lg:p-10"
+            >
+
+              <h3 className="text-xl sm:text-2xl font-bold mb-7 sm:mb-8">
                 Contact Information
               </h3>
 
-              <div className="space-y-8">
+              <div className="space-y-6 sm:space-y-8">
 
-                <div className="flex gap-5">
+                {/* Address */}
 
-                  <div className="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center">
+                <div className="flex gap-4 sm:gap-5">
 
-                    <FaMapMarkerAlt className="text-green-600 text-xl" />
-
+                  <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-green-100 flex items-center justify-center">
+                    <FaMapMarkerAlt className="text-green-600 text-lg sm:text-xl" />
                   </div>
 
-                  <div>
+                  <div className="min-w-0">
 
-                    <h4 className="font-bold text-lg">
+                    <h4 className="font-bold text-base sm:text-lg">
                       Address
                     </h4>
 
-                    <p className="text-gray-500 mt-1">
+                    <p className="text-gray-500 mt-1 text-sm sm:text-base">
                       Lahore, Pakistan
                     </p>
 
@@ -264,21 +268,21 @@ function Contact() {
 
                 </div>
 
-                <div className="flex gap-5">
+                {/* Phone */}
 
-                  <div className="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center">
+                <div className="flex gap-4 sm:gap-5">
 
-                    <FaPhoneAlt className="text-green-600 text-xl" />
-
+                  <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-green-100 flex items-center justify-center">
+                    <FaPhoneAlt className="text-green-600 text-lg sm:text-xl" />
                   </div>
 
-                  <div>
+                  <div className="min-w-0">
 
-                    <h4 className="font-bold text-lg">
+                    <h4 className="font-bold text-base sm:text-lg">
                       Phone
                     </h4>
 
-                    <p className="text-gray-500 mt-1">
+                    <p className="text-gray-500 mt-1 text-sm sm:text-base">
                       +92 300 1234567
                     </p>
 
@@ -286,21 +290,21 @@ function Contact() {
 
                 </div>
 
-                <div className="flex gap-5">
+                {/* Email */}
 
-                  <div className="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center">
+                <div className="flex gap-4 sm:gap-5">
 
-                    <FaEnvelope className="text-green-600 text-xl" />
-
+                  <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-green-100 flex items-center justify-center">
+                    <FaEnvelope className="text-green-600 text-lg sm:text-xl" />
                   </div>
 
-                  <div>
+                  <div className="min-w-0">
 
-                    <h4 className="font-bold text-lg">
+                    <h4 className="font-bold text-base sm:text-lg">
                       Email
                     </h4>
 
-                    <p className="text-gray-500 mt-1">
+                    <p className="text-gray-500 mt-1 text-sm sm:text-base break-all">
                       support@shopora.com
                     </p>
 
@@ -308,25 +312,25 @@ function Contact() {
 
                 </div>
 
-                <div className="flex gap-5">
+                {/* Working Hours */}
 
-                  <div className="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center">
+                <div className="flex gap-4 sm:gap-5">
 
-                    <FaClock className="text-green-600 text-xl" />
-
+                  <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-green-100 flex items-center justify-center">
+                    <FaClock className="text-green-600 text-lg sm:text-xl" />
                   </div>
 
                   <div>
 
-                    <h4 className="font-bold text-lg">
+                    <h4 className="font-bold text-base sm:text-lg">
                       Working Hours
                     </h4>
 
-                    <p className="text-gray-500 mt-1">
+                    <p className="text-gray-500 mt-1 text-sm sm:text-base">
                       Monday - Saturday
                     </p>
 
-                    <p className="text-gray-500">
+                    <p className="text-gray-500 text-sm sm:text-base">
                       9:00 AM - 6:00 PM
                     </p>
 
@@ -338,17 +342,17 @@ function Contact() {
 
             </div>
 
-            {/* Right */}
+            {/* Contact Form */}
 
-            <div className="bg-white rounded-3xl shadow-xl border border-green-100 p-10">
+            <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-green-100 p-6 sm:p-8 lg:p-10">
 
-              <h3 className="text-2xl font-bold mb-8">
+              <h3 className="text-xl sm:text-2xl font-bold mb-7 sm:mb-8">
                 Send Message
               </h3>
 
               <form
                 onSubmit={handleSubmit}
-                className="space-y-6"
+                className="space-y-5 sm:space-y-6"
               >
 
                 <input
@@ -357,7 +361,7 @@ function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Your Name"
-                  className="w-full border border-gray-200 rounded-xl px-5 py-4 outline-none focus:border-green-600 focus:ring-2 focus:ring-green-200"
+                  className="w-full border border-gray-200 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 text-sm sm:text-base outline-none focus:border-green-600 focus:ring-2 focus:ring-green-200"
                 />
 
                 <input
@@ -366,7 +370,7 @@ function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Your Email"
-                  className="w-full border border-gray-200 rounded-xl px-5 py-4 outline-none focus:border-green-600 focus:ring-2 focus:ring-green-200"
+                  className="w-full border border-gray-200 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 text-sm sm:text-base outline-none focus:border-green-600 focus:ring-2 focus:ring-green-200"
                 />
 
                 <input
@@ -375,21 +379,22 @@ function Contact() {
                   value={formData.subject}
                   onChange={handleChange}
                   placeholder="Subject"
-                  className="w-full border border-gray-200 rounded-xl px-5 py-4 outline-none focus:border-green-600 focus:ring-2 focus:ring-green-200"
+                  className="w-full border border-gray-200 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 text-sm sm:text-base outline-none focus:border-green-600 focus:ring-2 focus:ring-green-200"
                 />
-                                <textarea
-                  rows="6"
+
+                <textarea
+                  rows="5"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Write your message..."
-                  className="w-full border border-gray-200 rounded-xl px-5 py-4 outline-none resize-none focus:border-green-600 focus:ring-2 focus:ring-green-200"
+                  className="w-full border border-gray-200 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 text-sm sm:text-base outline-none resize-none focus:border-green-600 focus:ring-2 focus:ring-green-200"
                 ></textarea>
 
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`w-full py-4 rounded-xl text-white font-semibold text-lg transition ${
+                  className={`w-full py-3.5 sm:py-4 rounded-xl text-white font-semibold text-base sm:text-lg transition ${
                     loading
                       ? "bg-green-400 cursor-not-allowed"
                       : "bg-green-600 hover:bg-green-700"
@@ -404,16 +409,16 @@ function Contact() {
 
           </div>
 
-          {/* Google Map */}
+          {/* ================= GOOGLE MAP ================= */}
 
-          <div className="mt-16">
+          <div className="mt-10 sm:mt-14 lg:mt-16">
 
-            <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-green-100">
+            <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-green-100">
 
               <iframe
                 title="Location Map"
                 src="https://www.google.com/maps?q=Lahore,Pakistan&output=embed"
-                className="w-full h-[420px] border-0"
+                className="w-full h-[280px] sm:h-[350px] lg:h-[420px] border-0"
                 loading="lazy"
               ></iframe>
 
@@ -421,120 +426,119 @@ function Contact() {
 
           </div>
 
-          {/* Extra Contact Cards */}
+          {/* ================= EXTRA CONTACT CARDS ================= */}
 
-          {/* Extra Contact Cards */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 mt-10 sm:mt-14 lg:mt-16">
 
-<div className="grid md:grid-cols-3 gap-6 mt-16">
+            {/* WhatsApp */}
 
-  {/* WhatsApp */}
+            <a
+              href="https://wa.me/923111734194"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white rounded-2xl border border-green-100 shadow-lg p-5 sm:p-6 text-center hover:-translate-y-2 hover:shadow-xl transition duration-300 group"
+            >
 
-  <a
-    href="https://wa.me/923111734194"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="bg-white rounded-2xl border border-green-100 shadow-lg p-6 text-center hover:-translate-y-2 hover:shadow-xl transition duration-300 group"
-  >
+              <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center group-hover:bg-green-600 transition">
 
-    <div className="w-16 h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center group-hover:bg-green-600 transition">
+                <FaPhoneAlt className="text-green-600 text-xl sm:text-2xl group-hover:text-white transition" />
 
-      <FaPhoneAlt className="text-green-600 text-2xl group-hover:text-white transition" />
+              </div>
 
-    </div>
+              <h3 className="text-lg sm:text-xl font-bold mt-4 sm:mt-5">
+                WhatsApp
+              </h3>
 
-    <h3 className="text-xl font-bold mt-5">
-      WhatsApp
-    </h3>
+              <p className="text-gray-500 mt-2 text-sm sm:text-base">
+                +92 311 1734194
+              </p>
 
-    <p className="text-gray-500 mt-2">
-      +92 311 1734194
-    </p>
+              <p className="text-green-600 font-medium mt-2 text-sm">
+                Click to Chat
+              </p>
 
-    <p className="text-green-600 font-medium mt-2 text-sm">
-      Click to Chat
-    </p>
+            </a>
 
-  </a>
+            {/* Email */}
 
-  {/* Email */}
+            <a
+              href="mailto:mahersaba441@gmail.com"
+              className="bg-white rounded-2xl border border-green-100 shadow-lg p-5 sm:p-6 text-center hover:-translate-y-2 hover:shadow-xl transition duration-300 group"
+            >
 
-  <a
-    href="mailto:mahersaba441@gmail.com"
-    className="bg-white rounded-2xl border border-green-100 shadow-lg p-6 text-center hover:-translate-y-2 hover:shadow-xl transition duration-300 group"
-  >
+              <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center group-hover:bg-green-600 transition">
 
-    <div className="w-16 h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center group-hover:bg-green-600 transition">
+                <FaEnvelope className="text-green-600 text-xl sm:text-2xl group-hover:text-white transition" />
 
-      <FaEnvelope className="text-green-600 text-2xl group-hover:text-white transition" />
+              </div>
 
-    </div>
+              <h3 className="text-lg sm:text-xl font-bold mt-4 sm:mt-5">
+                Email
+              </h3>
 
-    <h3 className="text-xl font-bold mt-5">
-      Email
-    </h3>
+              <p className="text-gray-500 mt-2 text-sm sm:text-base break-all">
+                mahersaba441@gmail.com
+              </p>
 
-    <p className="text-gray-500 mt-2 break-all">
-      mahersaba441@gmail.com
-    </p>
+              <p className="text-green-600 font-medium mt-2 text-sm">
+                Click to Send Email
+              </p>
 
-    <p className="text-green-600 font-medium mt-2 text-sm">
-      Click to Send Email
-    </p>
+            </a>
 
-  </a>
+            {/* Working Hours */}
 
-  {/* Working Hours */}
+            <details className="bg-white rounded-2xl border border-green-100 shadow-lg p-5 sm:p-6 hover:-translate-y-2 hover:shadow-xl transition duration-300 cursor-pointer group sm:col-span-2 lg:col-span-1">
 
-  <details className="bg-white rounded-2xl border border-green-100 shadow-lg p-6 hover:-translate-y-2 hover:shadow-xl transition duration-300 cursor-pointer group">
+              <summary className="list-none text-center cursor-pointer">
 
-    <summary className="list-none text-center cursor-pointer">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center group-hover:bg-green-600 transition">
 
-      <div className="w-16 h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center group-hover:bg-green-600 transition">
+                  <FaClock className="text-green-600 text-xl sm:text-2xl group-hover:text-white transition" />
 
-        <FaClock className="text-green-600 text-2xl group-hover:text-white transition" />
+                </div>
 
-      </div>
+                <h3 className="text-lg sm:text-xl font-bold mt-4 sm:mt-5">
+                  Working Hours
+                </h3>
 
-      <h3 className="text-xl font-bold mt-5">
-        Working Hours
-      </h3>
+                <p className="text-gray-500 mt-2 text-sm">
+                  Click to View Details
+                </p>
 
-      <p className="text-gray-500 mt-2">
-        Click to View Details
-      </p>
+              </summary>
 
-    </summary>
+              <div className="mt-5 border-t pt-4 text-center space-y-2">
 
-    <div className="mt-6 border-t pt-4 text-center space-y-2">
+                <p className="text-gray-700 text-sm sm:text-base">
+                  📅 <strong>Monday - Saturday</strong>
+                </p>
 
-      <p className="text-gray-700">
-        📅 <strong>Monday - Saturday</strong>
-      </p>
+                <p className="text-gray-700 text-sm sm:text-base">
+                  🕘 9:00 AM - 6:00 PM
+                </p>
 
-      <p className="text-gray-700">
-        🕘 9:00 AM - 6:00 PM
-      </p>
+                <p className="text-gray-700 text-sm sm:text-base">
+                  🚫 Sunday - Closed
+                </p>
 
-      <p className="text-gray-700">
-        🚫 Sunday - Closed
-      </p>
+                <p className="text-green-600 font-semibold pt-2 text-sm">
+                  Customer support is available during working hours.
+                </p>
 
-      <p className="text-green-600 font-semibold pt-2">
-        Customer support is available during working hours.
-      </p>
+              </div>
 
-    </div>
+            </details>
 
-  </details>
-</div>
-</div>
-</section>
+          </div>
 
-<Newsletter />
+        </div>
 
-<Footer />
+      </section>
 
+      <Newsletter />
 
+      <Footer />
     </>
   );
 }

@@ -1,3 +1,4 @@
+
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
@@ -75,41 +76,54 @@ function Beauty() {
       {/* ================= PREMIUM BEAUTY BANNER ================= */}
 
       <section className="relative overflow-hidden bg-gradient-to-r from-pink-50 via-white to-green-50 border-b">
-        <div className="absolute -top-24 -left-24 w-72 h-72 bg-pink-200/40 rounded-full blur-3xl"></div>
+        
+        {/* Background Blur */}
 
-        <div className="absolute -bottom-24 -right-24 w-72 h-72 bg-green-200/40 rounded-full blur-3xl"></div>
+        <div className="absolute -top-20 -left-20 sm:-top-24 sm:-left-24 w-48 h-48 sm:w-72 sm:h-72 bg-pink-200/40 rounded-full blur-3xl"></div>
 
-        <div className="relative max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 items-center py-8 gap-10">
+        <div className="absolute -bottom-20 -right-20 sm:-bottom-24 sm:-right-24 w-48 h-48 sm:w-72 sm:h-72 bg-green-200/40 rounded-full blur-3xl"></div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="grid lg:grid-cols-2 items-center py-10 sm:py-14 lg:py-8 gap-10 lg:gap-16">
 
             {/* Left Content */}
 
-            <div>
-              <span className="inline-flex px-4 py-2 rounded-full bg-green-100 text-green-600 font-semibold text-sm">
+            <div className="text-center lg:text-left">
+
+              <span className="inline-flex px-4 py-2 rounded-full bg-green-100 text-green-600 font-semibold text-xs sm:text-sm">
                 ✨ Premium Beauty Store
               </span>
 
-              <h1 className="mt-5 text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight">
+              <h1 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight">
                 Discover Your
-                <span className="text-green-500"> Natural Beauty</span>
+                <span className="text-green-500 block sm:inline">
+                  {" "}Natural Beauty
+                </span>
               </h1>
 
-              <p className="mt-5 text-gray-600 text-lg max-w-lg">
+              <p className="mt-5 text-gray-600 text-base sm:text-lg max-w-lg mx-auto lg:mx-0 leading-relaxed">
                 Explore skincare, makeup and beauty essentials crafted with
                 premium quality products for your daily glow.
               </p>
 
-              <div className="flex items-center gap-5 mt-7">
+              {/* Buttons / Breadcrumb */}
+
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-5 mt-7">
+
                 <Link
                   to="/shop"
-                  className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition"
+                  className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition"
                 >
                   Shop Now
                   <FaArrowRight />
                 </Link>
 
-                <div className="text-gray-500">
-                  <Link to="/" className="hover:text-green-600">
+                <div className="text-gray-500 text-sm sm:text-base">
+                  <Link
+                    to="/"
+                    className="hover:text-green-600"
+                  >
                     Home
                   </Link>
 
@@ -119,50 +133,63 @@ function Beauty() {
                     Beauty
                   </span>
                 </div>
+
               </div>
+
             </div>
 
             {/* Banner Image */}
 
-            <div className="flex justify-end">
-              <div className="bg-white rounded-3xl shadow-xl p-5">
+            <div className="flex justify-center lg:justify-end">
+
+              <div className="w-full max-w-sm sm:max-w-md bg-white rounded-3xl shadow-xl p-3 sm:p-5">
+
                 <img
                   src={beautyBanner}
                   alt="Beauty Collection"
-                  className="w-[380px] h-[380px] object-cover rounded-2xl hover:scale-105 transition duration-500"
+                  className="w-full aspect-square object-cover rounded-2xl hover:scale-105 transition duration-500"
                 />
+
               </div>
+
             </div>
 
           </div>
+
         </div>
+
       </section>
 
       {/* ================= PRODUCTS SECTION ================= */}
 
-      <section className="py-20 bg-[#f8faf8]">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-14 sm:py-16 lg:py-20 bg-[#f8faf8]">
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Heading */}
 
-          <div className="text-center mb-12">
-            <span className="text-green-500 font-semibold uppercase tracking-widest">
+          <div className="text-center mb-10 sm:mb-12">
+
+            <span className="text-green-500 font-semibold uppercase tracking-widest text-xs sm:text-sm">
               Beauty Collection
             </span>
 
-            <h2 className="text-4xl font-bold text-gray-900 mt-3">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-3">
               Featured Beauty Products
             </h2>
 
-            <p className="text-gray-500 mt-4">
+            <p className="text-gray-500 mt-4 text-sm sm:text-base max-w-2xl mx-auto">
               Choose premium products for your skincare and beauty routine.
             </p>
+
           </div>
 
           {/* ================= PRODUCT GRID ================= */}
 
-          <div className="grid md:grid-cols-4 gap-7">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-7">
+
             {products.map((product) => (
+
               <div
                 key={product.id}
                 className="
@@ -179,7 +206,8 @@ function Beauty() {
 
                 {/* Product Image */}
 
-                <div className="h-64 overflow-hidden">
+                <div className="h-60 sm:h-64 overflow-hidden">
+
                   <img
                     src={product.image}
                     alt={product.name}
@@ -192,20 +220,22 @@ function Beauty() {
                       duration-500
                     "
                   />
+
                 </div>
 
                 {/* Product Details */}
 
-                <div className="p-6">
+                <div className="p-5 sm:p-6">
 
-                  <h3 className="text-xl font-bold text-gray-900">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900">
                     {product.name}
                   </h3>
 
                   {/* Rating */}
 
                   <div className="flex items-center gap-2 mt-3">
-                    <div className="flex text-yellow-400">
+
+                    <div className="flex text-yellow-400 text-sm sm:text-base">
                       <FaStar />
                       <FaStar />
                       <FaStar />
@@ -216,6 +246,7 @@ function Beauty() {
                     <span className="text-gray-500 text-sm">
                       {product.rating}
                     </span>
+
                   </div>
 
                   {/* Price + Add To Cart */}
@@ -240,22 +271,30 @@ function Beauty() {
                         justify-center
                         hover:bg-green-700
                         transition
+                        cursor-pointer
                       "
                     >
                       <FaShoppingBag />
                     </button>
 
                   </div>
+
                 </div>
+
               </div>
+
             ))}
+
           </div>
+
         </div>
+
       </section>
 
       {/* ================= FOOTER ================= */}
 
       <Footer />
+
     </>
   );
 }

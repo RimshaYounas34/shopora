@@ -1,5 +1,6 @@
 
 import { Link } from "react-router-dom";
+
 import {
   FaPlay,
   FaTruck,
@@ -12,43 +13,57 @@ import bag from "../assets/images/bags.png";
 
 function Hero() {
   return (
-    <section className="bg-[#fff8f2]">
+    <section className="bg-[#fff8f2] overflow-hidden">
 
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      {/* ================= HERO CONTENT ================= */}
 
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16">
 
-          {/* LEFT */}
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-          <div>
+          {/* ================= LEFT SIDE ================= */}
 
-            <p className="text-orange-500 font-semibold mb-4">
+          <div className="text-center lg:text-left">
+
+            <p className="text-orange-500 font-semibold mb-4 text-sm sm:text-base">
               Summer Sale Live Now!
             </p>
 
-            <h1 className="text-6xl font-bold leading-tight text-gray-900">
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-gray-900">
+
               Discover the Best
               <br />
+
               Products at
               <br />
+
               Best Prices
+
             </h1>
 
-            <p className="mt-6 text-gray-500 text-lg leading-8 max-w-md">
+
+            <p className="mt-5 sm:mt-6 text-gray-500 text-base sm:text-lg leading-7 sm:leading-8 max-w-md mx-auto lg:mx-0">
+
               Find everything you need in one place.
               Top quality, best deals and fast delivery.
+
             </p>
 
-            <div className="flex items-center gap-5 mt-8">
+
+            {/* ================= BUTTONS ================= */}
+
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-5 mt-7 sm:mt-8">
 
               {/* Shop Button */}
 
               <Link
                 to="/shop"
-                className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-semibold transition duration-300"
+                className="w-full sm:w-auto text-center bg-green-600 hover:bg-green-700 text-white px-7 sm:px-8 py-3.5 sm:py-4 rounded-lg font-semibold transition duration-300 shadow-sm hover:shadow-md"
               >
                 Shop Now
               </Link>
+
 
               {/* Watch Video */}
 
@@ -57,13 +72,15 @@ function Hero() {
                 className="flex items-center gap-3 font-semibold text-gray-800 hover:text-green-600 transition"
               >
 
-                <div className="w-12 h-12 rounded-full bg-white shadow flex items-center justify-center">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white shadow flex items-center justify-center flex-shrink-0">
 
-                  <FaPlay className="text-green-600" />
+                  <FaPlay className="text-green-600 text-sm" />
 
                 </div>
 
-                Watch Video
+                <span>
+                  Watch Video
+                </span>
 
               </Link>
 
@@ -71,30 +88,32 @@ function Hero() {
 
           </div>
 
-          {/* RIGHT */}
 
-          <div className="relative">
+          {/* ================= RIGHT SIDE ================= */}
 
-            {/* Offer Circle */}
+          <div className="relative flex justify-center mt-4 lg:mt-0">
 
-            <div className="absolute top-4 left-0 bg-white rounded-full w-28 h-28 shadow-xl flex flex-col justify-center items-center z-10">
+            {/* ================= OFFER CIRCLE ================= */}
 
-              <span className="text-3xl font-bold text-red-500">
+            <div className="absolute top-0 left-2 sm:left-8 lg:left-0 bg-white rounded-full w-24 h-24 sm:w-28 sm:h-28 shadow-xl flex flex-col justify-center items-center z-10">
+
+              <span className="text-2xl sm:text-3xl font-bold text-red-500">
                 50%
               </span>
 
-              <span className="text-gray-600 text-sm">
+              <span className="text-gray-600 text-xs sm:text-sm">
                 OFF
               </span>
 
             </div>
 
-            {/* Main Image */}
+
+            {/* ================= MAIN IMAGE ================= */}
 
             <img
               src={bag}
               alt="Shopping Bag"
-              className="w-full max-w-xl mx-auto"
+              className="w-full max-w-sm sm:max-w-md lg:max-w-xl mx-auto object-contain"
             />
 
           </div>
@@ -103,23 +122,26 @@ function Hero() {
 
       </div>
 
-      {/* Bottom Features */}
 
-      <div className="max-w-7xl mx-auto px-6 pb-10">
+      {/* ================= BOTTOM FEATURES ================= */}
 
-        <div className="bg-white rounded-2xl shadow-md grid md:grid-cols-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-10">
 
-          <div className="flex gap-4 p-6">
+        <div className="bg-white rounded-2xl shadow-md grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 overflow-hidden">
 
-            <FaTruck className="text-green-600 text-3xl" />
+          {/* ================= FREE SHIPPING ================= */}
+
+          <div className="flex items-center gap-4 p-5 sm:p-6 border-b sm:border-r lg:border-b-0">
+
+            <FaTruck className="text-green-600 text-2xl sm:text-3xl flex-shrink-0" />
 
             <div>
 
-              <h3 className="font-bold">
+              <h3 className="font-bold text-gray-800">
                 Free Shipping
               </h3>
 
-              <p className="text-gray-500 text-sm">
+              <p className="text-gray-500 text-sm mt-1">
                 On orders over $50
               </p>
 
@@ -127,17 +149,20 @@ function Hero() {
 
           </div>
 
-          <div className="flex gap-4 p-6">
 
-            <FaUndo className="text-green-600 text-3xl" />
+          {/* ================= RETURNS ================= */}
+
+          <div className="flex items-center gap-4 p-5 sm:p-6 border-b lg:border-b-0 lg:border-r">
+
+            <FaUndo className="text-green-600 text-2xl sm:text-3xl flex-shrink-0" />
 
             <div>
 
-              <h3 className="font-bold">
+              <h3 className="font-bold text-gray-800">
                 30 Days Returns
               </h3>
 
-              <p className="text-gray-500 text-sm">
+              <p className="text-gray-500 text-sm mt-1">
                 Money back guarantee
               </p>
 
@@ -145,17 +170,20 @@ function Hero() {
 
           </div>
 
-          <div className="flex gap-4 p-6">
 
-            <FaShieldAlt className="text-green-600 text-3xl" />
+          {/* ================= SECURE PAYMENT ================= */}
+
+          <div className="flex items-center gap-4 p-5 sm:p-6 border-b sm:border-b-0 sm:border-r">
+
+            <FaShieldAlt className="text-green-600 text-2xl sm:text-3xl flex-shrink-0" />
 
             <div>
 
-              <h3 className="font-bold">
+              <h3 className="font-bold text-gray-800">
                 Secure Payment
               </h3>
 
-              <p className="text-gray-500 text-sm">
+              <p className="text-gray-500 text-sm mt-1">
                 100% secure payment
               </p>
 
@@ -163,17 +191,20 @@ function Hero() {
 
           </div>
 
-          <div className="flex gap-4 p-6">
 
-            <FaHeadset className="text-green-600 text-3xl" />
+          {/* ================= SUPPORT ================= */}
+
+          <div className="flex items-center gap-4 p-5 sm:p-6">
+
+            <FaHeadset className="text-green-600 text-2xl sm:text-3xl flex-shrink-0" />
 
             <div>
 
-              <h3 className="font-bold">
+              <h3 className="font-bold text-gray-800">
                 24/7 Support
               </h3>
 
-              <p className="text-gray-500 text-sm">
+              <p className="text-gray-500 text-sm mt-1">
                 Dedicated support
               </p>
 
@@ -190,4 +221,3 @@ function Hero() {
 }
 
 export default Hero;
-

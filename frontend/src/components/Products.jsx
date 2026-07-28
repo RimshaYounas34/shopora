@@ -1,51 +1,146 @@
+
+import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import products from "../data/products";
 
 function Products() {
   return (
-    <section className="py-6 bg-white">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="py-8 sm:py-10 bg-white">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4">
 
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+        {/* ================= HEADER ================= */}
 
-          <h2 className="text-3xl font-bold">
-            Featured Products
-          </h2>
+        <div className="mb-7 sm:mb-8">
 
-          <div className="flex gap-3 mt-4 md:mt-0">
-            <button className="bg-green-600 text-white px-4 py-2 rounded-full">
-              All
-            </button>
+          {/* Title + View All */}
 
-            <button className="text-gray-600 hover:text-green-600">
-              Best Sellers
-            </button>
+          <div className="flex items-center justify-between gap-3 mb-5">
 
-            <button className="text-gray-600 hover:text-green-600">
-              Top Rated
-            </button>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+              Featured Products
+            </h2>
 
-            <button className="text-gray-600 hover:text-green-600">
-              New Arrivals
-            </button>
+            {/* View All Products */}
+
+            <Link
+              to="/shop"
+              className="text-green-600 font-semibold text-sm sm:text-base whitespace-nowrap hover:text-green-700 transition"
+            >
+              View All Products →
+            </Link>
+
           </div>
 
-          <button className="text-green-600 font-semibold mt-4 md:mt-0">
-            View All Products →
-          </button>
+
+          {/* ================= CATEGORY BUTTONS ================= */}
+
+          <div className="flex items-center justify-center gap-2 sm:gap-3 w-full">
+
+            {/* All */}
+
+            <Link
+              to="/shop"
+              className="
+                bg-green-600
+                text-white
+                px-4 sm:px-5
+                py-2.5
+                rounded-full
+                text-sm sm:text-base
+                font-medium
+                whitespace-nowrap
+                flex-shrink-0
+                transition
+                hover:bg-green-700
+              "
+            >
+              All
+            </Link>
+
+
+            {/* Best Sellers */}
+
+            <Link
+              to="/best-sellers"
+              className="
+                text-gray-600
+                hover:text-green-600
+                px-2.5 sm:px-4
+                py-2.5
+                rounded-full
+                text-sm sm:text-base
+                font-medium
+                whitespace-nowrap
+                flex-shrink-0
+                transition
+              "
+            >
+              Best Sellers
+            </Link>
+
+
+            {/* Top Rated */}
+
+            <Link
+              to="/top-rated"
+              className="
+                text-gray-600
+                hover:text-green-600
+                px-2.5 sm:px-4
+                py-2.5
+                rounded-full
+                text-sm sm:text-base
+                font-medium
+                whitespace-nowrap
+                flex-shrink-0
+                transition
+              "
+            >
+              Top Rated
+            </Link>
+
+
+            {/* New Arrivals */}
+
+            <Link
+              to="/new-arrivals"
+              className="
+                text-gray-600
+                hover:text-green-600
+                px-2.5 sm:px-4
+                py-2.5
+                rounded-full
+                text-sm sm:text-base
+                font-medium
+                whitespace-nowrap
+                flex-shrink-0
+                transition
+              "
+            >
+              New Arrivals
+            </Link>
+
+          </div>
 
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+
+        {/* ================= PRODUCTS GRID ================= */}
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
+
           {products.map((product) => (
+
             <ProductCard
               key={product.id}
               product={product}
             />
+
           ))}
+
         </div>
 
-      </div>s
+      </div>
     </section>
   );
 }

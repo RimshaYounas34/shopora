@@ -33,13 +33,13 @@ function BlogSidebar() {
   ];
 
   return (
-    <div className="space-y-8">
+    <aside className="w-full space-y-5 sm:space-y-6 lg:space-y-8">
 
-      {/* Search */}
+      {/* ================= SEARCH ================= */}
 
-      <div className="bg-white p-6 rounded-3xl shadow-sm border">
+      <div className="bg-white p-4 sm:p-5 lg:p-6 rounded-2xl sm:rounded-3xl shadow-sm border border-gray-100">
 
-        <h3 className="text-xl font-bold mb-5">
+        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-5">
           Search
         </h3>
 
@@ -48,29 +48,30 @@ function BlogSidebar() {
           <input
             type="text"
             placeholder="Search..."
-            className="w-full border rounded-xl py-3 pl-4 pr-12 outline-none focus:border-green-600"
+            className="w-full h-11 sm:h-12 border border-gray-200 rounded-xl py-3 pl-4 pr-11 text-sm sm:text-base text-gray-700 outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition"
           />
 
-          <FaSearch className="absolute right-4 top-4 text-gray-400" />
+          <FaSearch className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm sm:text-base" />
 
         </div>
 
       </div>
 
-      {/* Categories */}
 
-      <div className="bg-white p-6 rounded-3xl shadow-sm border">
+      {/* ================= CATEGORIES ================= */}
 
-        <h3 className="text-xl font-bold mb-5">
+      <div className="bg-white p-4 sm:p-5 lg:p-6 rounded-2xl sm:rounded-3xl shadow-sm border border-gray-100">
+
+        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-5">
           Categories
         </h3>
 
-        <div className="space-y-3">
+        <div className="space-y-2 sm:space-y-3">
 
           {categories.map((item, index) => (
             <button
               key={index}
-              className="block w-full text-left hover:text-green-600 transition"
+              className="block w-full text-left py-1 text-sm sm:text-base text-gray-600 hover:text-green-600 hover:translate-x-1 transition-all duration-200"
             >
               {item}
             </button>
@@ -80,34 +81,41 @@ function BlogSidebar() {
 
       </div>
 
-      {/* Recent Posts */}
 
-      <div className="bg-white p-6 rounded-3xl shadow-sm border">
+      {/* ================= RECENT POSTS ================= */}
 
-        <h3 className="text-xl font-bold mb-5">
+      <div className="bg-white p-4 sm:p-5 lg:p-6 rounded-2xl sm:rounded-3xl shadow-sm border border-gray-100">
+
+        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-5">
           Recent Posts
         </h3>
 
-        <div className="space-y-5">
+        <div className="space-y-4 sm:space-y-5">
 
           {recentPosts.map((post, index) => (
             <div
               key={index}
-              className="flex gap-4"
+              className="flex items-center gap-3 sm:gap-4 group"
             >
+
+              {/* Image */}
+
               <img
                 src={post.image}
                 alt={post.title}
-                className="w-20 h-20 rounded-xl object-cover"
+                className="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 rounded-xl object-cover group-hover:scale-105 transition duration-300"
               />
 
-              <div>
 
-                <h4 className="font-semibold text-sm hover:text-green-600 cursor-pointer transition">
+              {/* Content */}
+
+              <div className="min-w-0">
+
+                <h4 className="font-semibold text-xs sm:text-sm text-gray-800 leading-5 group-hover:text-green-600 transition line-clamp-2">
                   {post.title}
                 </h4>
 
-                <p className="text-gray-500 text-sm mt-2">
+                <p className="text-gray-500 text-xs sm:text-sm mt-1 sm:mt-2">
                   {post.date}
                 </p>
 
@@ -120,7 +128,7 @@ function BlogSidebar() {
 
       </div>
 
-    </div>
+    </aside>
   );
 }
 

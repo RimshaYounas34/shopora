@@ -87,7 +87,6 @@ function AdminOrders() {
         );
       }
 
-      // Update frontend immediately
       setOrders((previousOrders) =>
         previousOrders.map((order) =>
           order.orderId === orderId
@@ -183,18 +182,17 @@ function AdminOrders() {
   return (
     <div className="min-h-screen bg-gray-100">
 
-
       {/* ================= HEADER ================= */}
 
-      <header className="bg-white border-b px-6 py-5">
+      <header className="bg-white border-b px-4 sm:px-6 py-5">
 
         <div className="max-w-7xl mx-auto">
 
-          <h1 className="text-3xl font-bold text-gray-800">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
             All Orders
           </h1>
 
-          <p className="text-gray-500 mt-1">
+          <p className="text-sm sm:text-base text-gray-500 mt-1">
             Manage and track all customer orders.
           </p>
 
@@ -205,14 +203,13 @@ function AdminOrders() {
 
       {/* ================= MAIN ================= */}
 
-      <main className="max-w-7xl mx-auto px-6 py-10">
-
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
 
         {/* ================= ERROR ================= */}
 
         {error && (
 
-          <div className="mb-6 bg-red-100 border border-red-200 text-red-700 px-5 py-4 rounded-xl">
+          <div className="mb-6 bg-red-100 border border-red-200 text-red-700 px-4 sm:px-5 py-4 rounded-xl text-sm sm:text-base">
 
             {error}
 
@@ -225,9 +222,9 @@ function AdminOrders() {
 
         {!loading && (
 
-          <div className="mb-6">
+          <div className="mb-5 sm:mb-6">
 
-            <p className="text-gray-600">
+            <p className="text-sm sm:text-base text-gray-600">
 
               Total Orders:
 
@@ -246,11 +243,11 @@ function AdminOrders() {
 
         {loading && (
 
-          <div className="bg-white rounded-2xl p-16 text-center shadow-sm">
+          <div className="bg-white rounded-2xl p-10 sm:p-16 text-center shadow-sm">
 
             <div className="w-10 h-10 border-4 border-green-200 border-t-green-600 rounded-full animate-spin mx-auto"></div>
 
-            <p className="text-gray-500 mt-4">
+            <p className="text-gray-500 mt-4 text-sm sm:text-base">
               Loading orders...
             </p>
 
@@ -264,15 +261,15 @@ function AdminOrders() {
         {!loading &&
           orders.length === 0 && (
 
-            <div className="bg-white rounded-2xl p-16 text-center shadow-sm">
+            <div className="bg-white rounded-2xl p-10 sm:p-16 text-center shadow-sm">
 
-              <FaBoxOpen className="text-gray-300 text-6xl mx-auto" />
+              <FaBoxOpen className="text-gray-300 text-5xl sm:text-6xl mx-auto" />
 
-              <h2 className="text-xl font-bold text-gray-700 mt-5">
+              <h2 className="text-lg sm:text-xl font-bold text-gray-700 mt-5">
                 No Orders Found
               </h2>
 
-              <p className="text-gray-500 mt-2">
+              <p className="text-sm sm:text-base text-gray-500 mt-2">
                 There are no customer orders yet.
               </p>
 
@@ -286,12 +283,13 @@ function AdminOrders() {
         {!loading &&
           orders.length > 0 && (
 
-            <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+            <div className="bg-white rounded-xl sm:rounded-2xl shadow-sm overflow-hidden">
+
+              {/* Horizontal scroll on small screens */}
 
               <div className="overflow-x-auto">
 
                 <table className="w-full min-w-[1200px]">
-
 
                   {/* ================= TABLE HEADER ================= */}
 
@@ -299,31 +297,31 @@ function AdminOrders() {
 
                     <tr>
 
-                      <th className="text-left px-6 py-4 text-gray-600">
+                      <th className="text-left px-4 sm:px-6 py-4 text-sm text-gray-600">
                         Order ID
                       </th>
 
-                      <th className="text-left px-6 py-4 text-gray-600">
+                      <th className="text-left px-4 sm:px-6 py-4 text-sm text-gray-600">
                         Customer
                       </th>
 
-                      <th className="text-left px-6 py-4 text-gray-600">
+                      <th className="text-left px-4 sm:px-6 py-4 text-sm text-gray-600">
                         Products
                       </th>
 
-                      <th className="text-left px-6 py-4 text-gray-600">
+                      <th className="text-left px-4 sm:px-6 py-4 text-sm text-gray-600">
                         Total
                       </th>
 
-                      <th className="text-left px-6 py-4 text-gray-600">
+                      <th className="text-left px-4 sm:px-6 py-4 text-sm text-gray-600">
                         Payment
                       </th>
 
-                      <th className="text-left px-6 py-4 text-gray-600">
+                      <th className="text-left px-4 sm:px-6 py-4 text-sm text-gray-600">
                         Status
                       </th>
 
-                      <th className="text-left px-6 py-4 text-gray-600">
+                      <th className="text-left px-4 sm:px-6 py-4 text-sm text-gray-600">
                         Update Status
                       </th>
 
@@ -343,15 +341,12 @@ function AdminOrders() {
                         className="border-t hover:bg-gray-50 transition"
                       >
 
-
                         {/* ORDER ID */}
 
-                        <td className="px-6 py-5">
+                        <td className="px-4 sm:px-6 py-5">
 
-                          <span className="font-semibold text-green-600">
-
+                          <span className="font-semibold text-green-600 text-sm">
                             {order.orderId}
-
                           </span>
 
                         </td>
@@ -359,26 +354,19 @@ function AdminOrders() {
 
                         {/* CUSTOMER */}
 
-                        <td className="px-6 py-5">
+                        <td className="px-4 sm:px-6 py-5">
 
-                          <p className="font-semibold text-gray-800">
-
+                          <p className="font-semibold text-gray-800 text-sm">
                             {order.customer?.firstName}{" "}
-
                             {order.customer?.lastName}
-
                           </p>
 
-                          <p className="text-sm text-gray-500">
-
+                          <p className="text-xs sm:text-sm text-gray-500 mt-1">
                             {order.customer?.email}
-
                           </p>
 
-                          <p className="text-sm text-gray-500">
-
+                          <p className="text-xs sm:text-sm text-gray-500">
                             {order.customer?.phone}
-
                           </p>
 
                         </td>
@@ -386,7 +374,7 @@ function AdminOrders() {
 
                         {/* PRODUCTS */}
 
-                        <td className="px-6 py-5">
+                        <td className="px-4 sm:px-6 py-5">
 
                           <div className="space-y-2">
 
@@ -403,12 +391,12 @@ function AdminOrders() {
                                     <img
                                       src={product.image}
                                       alt={product.name}
-                                      className="w-12 h-12 object-cover rounded-lg"
+                                      className="w-12 h-12 object-cover rounded-lg flex-shrink-0"
                                     />
 
                                   ) : (
 
-                                    <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center">
+                                    <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
 
                                       <FaBoxOpen className="text-gray-400" />
 
@@ -416,18 +404,14 @@ function AdminOrders() {
 
                                   )}
 
-                                  <div>
+                                  <div className="min-w-[150px]">
 
-                                    <p className="font-semibold text-gray-800">
-
+                                    <p className="font-semibold text-gray-800 text-sm">
                                       {product.name}
-
                                     </p>
 
-                                    <p className="text-sm text-gray-500">
-
+                                    <p className="text-xs sm:text-sm text-gray-500">
                                       Qty: {product.quantity}
-
                                     </p>
 
                                   </div>
@@ -444,15 +428,13 @@ function AdminOrders() {
 
                         {/* TOTAL */}
 
-                        <td className="px-6 py-5">
+                        <td className="px-4 sm:px-6 py-5">
 
                           <p className="font-bold text-gray-800">
-
                             $
                             {Number(
                               order.total || 0
                             ).toFixed(2)}
-
                           </p>
 
                         </td>
@@ -460,7 +442,7 @@ function AdminOrders() {
 
                         {/* PAYMENT */}
 
-                        <td className="px-6 py-5 text-gray-600">
+                        <td className="px-4 sm:px-6 py-5 text-gray-600 text-sm">
 
                           {getPaymentName(
                             order.paymentMethod
@@ -471,10 +453,10 @@ function AdminOrders() {
 
                         {/* CURRENT STATUS */}
 
-                        <td className="px-6 py-5">
+                        <td className="px-4 sm:px-6 py-5">
 
                           <span
-                            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-semibold ${getStatusStyle(
+                            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap ${getStatusStyle(
                               order.status
                             )}`}
                           >
@@ -492,7 +474,7 @@ function AdminOrders() {
 
                         {/* UPDATE STATUS */}
 
-                        <td className="px-6 py-5">
+                        <td className="px-4 sm:px-6 py-5">
 
                           <select
                             value={order.status}
@@ -506,7 +488,7 @@ function AdminOrders() {
                                 e.target.value
                               )
                             }
-                            className="border border-gray-300 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-green-500 bg-white"
+                            className="border border-gray-300 rounded-xl px-3 sm:px-4 py-2.5 outline-none focus:ring-2 focus:ring-green-500 bg-white text-sm cursor-pointer"
                           >
 
                             <option value="Pending">
@@ -542,7 +524,6 @@ function AdminOrders() {
 
                         </td>
 
-
                       </tr>
 
                     ))}
@@ -556,7 +537,6 @@ function AdminOrders() {
             </div>
 
           )}
-
 
       </main>
 

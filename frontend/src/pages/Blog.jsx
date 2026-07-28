@@ -10,35 +10,44 @@ import Pagination from "../components/Pagination";
 function Blog() {
   return (
     <>
+      {/* ================= NAVBAR ================= */}
+
       <Navbar />
+
+      {/* ================= BLOG BANNER ================= */}
 
       <BlogBanner />
 
-      <section className="bg-gray-50 py-16">
+      {/* ================= BLOG SECTION ================= */}
 
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="bg-gray-50 py-10 sm:py-12 md:py-16">
 
-          <div className="grid lg:grid-cols-4 gap-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            {/* Blog Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-10">
 
-            <div className="lg:col-span-3">
+            {/* ================= BLOG CONTENT ================= */}
+
+            <div className="lg:col-span-3 min-w-0">
 
               <BlogGrid />
 
-              <div className="mt-14 flex justify-center">
+              {/* Pagination */}
+
+              <div className="mt-10 sm:mt-12 md:mt-14 flex justify-center">
                 <Pagination />
               </div>
 
             </div>
 
-            {/* Sidebar */}
 
-            <div>
+            {/* ================= SIDEBAR ================= */}
+
+            <aside className="w-full">
 
               <BlogSidebar />
 
-            </div>
+            </aside>
 
           </div>
 
@@ -46,9 +55,16 @@ function Blog() {
 
       </section>
 
+
+      {/* ================= NEWSLETTER ================= */}
+
       <Newsletter />
 
+
+      {/* ================= FOOTER ================= */}
+
       <Footer />
+
     </>
   );
 }

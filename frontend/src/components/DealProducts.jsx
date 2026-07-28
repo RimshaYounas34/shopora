@@ -105,32 +105,32 @@ function DealProducts() {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-12 sm:py-14 md:py-16 lg:py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-      <div className="max-w-7xl mx-auto px-6">
+        {/* ================= HEADING ================= */}
 
-        {/* Heading */}
+        <div className="text-center mb-10 sm:mb-12 md:mb-14">
 
-        <div className="text-center mb-14">
-
-          <span className="text-green-600 uppercase tracking-widest font-semibold">
+          <span className="text-green-600 uppercase tracking-widest text-xs sm:text-sm font-semibold">
             Flash Sale
           </span>
 
-          <h2 className="text-4xl font-bold mt-3 text-gray-800">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mt-3 text-gray-800">
             Today's Best Deals
           </h2>
 
-          <p className="text-gray-500 mt-4 max-w-2xl mx-auto">
+          <p className="text-gray-500 mt-3 sm:mt-4 max-w-2xl mx-auto text-sm sm:text-base leading-6 sm:leading-7 px-2">
             Grab premium products at amazing discounts.
             Limited-time offers available while stock lasts.
           </p>
 
         </div>
 
-        {/* Products */}
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* ================= PRODUCTS ================= */}
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
 
           {products.map((product) => (
             <ProductCard
@@ -142,7 +142,6 @@ function DealProducts() {
         </div>
 
       </div>
-
     </section>
   );
 }

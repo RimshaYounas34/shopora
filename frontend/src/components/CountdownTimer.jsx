@@ -1,12 +1,11 @@
+
 import { useEffect, useState } from "react";
 
 function CountdownTimer() {
-
   const targetTime =
     new Date().getTime() + 2 * 24 * 60 * 60 * 1000;
 
   const calculateTime = () => {
-
     const now = new Date().getTime();
     const difference = targetTime - now;
 
@@ -49,62 +48,53 @@ function CountdownTimer() {
   const [time, setTime] = useState(calculateTime());
 
   useEffect(() => {
-
     const timer = setInterval(() => {
       setTime(calculateTime());
     }, 1000);
 
     return () => clearInterval(timer);
-
   }, []);
 
+  const timeUnits = [
+    {
+      value: time.days,
+      label: "Days",
+    },
+    {
+      value: time.hours,
+      label: "Hours",
+    },
+    {
+      value: time.minutes,
+      label: "Minutes",
+    },
+    {
+      value: time.seconds,
+      label: "Seconds",
+    },
+  ];
+
   return (
+    <div className="w-full flex justify-center mt-8 sm:mt-10 px-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-5 w-full max-w-2xl">
+        {timeUnits.map((unit, index) => (
+          <div
+            key={index}
+            className="bg-white shadow-md hover:shadow-lg rounded-xl sm:rounded-2xl px-3 py-4 sm:px-5 sm:py-5 md:px-6 md:py-4 text-center w-full transition duration-300"
+          >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-600">
+              {unit.value}
+            </h2>
 
-    <div className="flex justify-center gap-5 mt-10">
-
-      <div className="bg-white shadow rounded-2xl px-6 py-4 text-center w-24">
-        <h2 className="text-3xl font-bold text-green-600">
-          {time.days}
-        </h2>
-
-        <p className="text-gray-500 text-sm">
-          Days
-        </p>
+            <p className="text-gray-500 text-xs sm:text-sm md:text-base mt-1">
+              {unit.label}
+            </p>
+          </div>
+        ))}
       </div>
-
-      <div className="bg-white shadow rounded-2xl px-6 py-4 text-center w-24">
-        <h2 className="text-3xl font-bold text-green-600">
-          {time.hours}
-        </h2>
-
-        <p className="text-gray-500 text-sm">
-          Hours
-        </p>
-      </div>
-
-      <div className="bg-white shadow rounded-2xl px-6 py-4 text-center w-24">
-        <h2 className="text-3xl font-bold text-green-600">
-          {time.minutes}
-        </h2>
-
-        <p className="text-gray-500 text-sm">
-          Minutes
-        </p>
-      </div>
-
-      <div className="bg-white shadow rounded-2xl px-6 py-4 text-center w-24">
-        <h2 className="text-3xl font-bold text-green-600">
-          {time.seconds}
-        </h2>
-
-        <p className="text-gray-500 text-sm">
-          Seconds
-        </p>
-      </div>
-
     </div>
-
   );
 }
 
 export default CountdownTimer;
+

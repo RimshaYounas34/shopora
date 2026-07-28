@@ -1,3 +1,4 @@
+
 import { Routes, Route } from "react-router-dom";
 
 // ================= PUBLIC / MAIN PAGES =================
@@ -31,6 +32,12 @@ import Beauty from "./pages/Beauty";
 import Groceries from "./pages/Groceries";
 import Watches from "./pages/Watches";
 import Shoes from "./pages/Shoes";
+
+// ================= FEATURED PRODUCT PAGES =================
+
+import BestSellers from "./pages/BestSellers";
+import TopRated from "./pages/TopRated";
+import NewArrivals from "./pages/NewArrivals";
 
 // ================= ROUTE PROTECTION =================
 
@@ -100,6 +107,34 @@ function App() {
             path="/shop"
             element={<Shop />}
           />
+
+
+          {/* ================= FEATURED PRODUCT PAGES ================= */}
+
+          {/* All Products */}
+          <Route
+            path="/shop"
+            element={<Shop />}
+          />
+
+          {/* Best Sellers */}
+          <Route
+            path="/best-sellers"
+            element={<BestSellers />}
+          />
+
+          {/* Top Rated */}
+          <Route
+            path="/top-rated"
+            element={<TopRated />}
+          />
+
+          {/* New Arrivals */}
+          <Route
+            path="/new-arrivals"
+            element={<NewArrivals />}
+          />
+
 
           {/* Product Details */}
           <Route

@@ -1,27 +1,44 @@
+
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+
 import DealsBanner from "../components/DealsBanner";
 import DealOffer from "../components/DealOffer";
 import DealProducts from "../components/DealProducts";
 
 function Deals() {
   return (
-    <>
-      {/* Navbar */}
+    <div className="min-h-screen bg-white overflow-x-hidden">
+
+      {/* ================= NAVBAR ================= */}
+
       <Navbar />
 
-      {/* Banner */}
-      <DealsBanner />
 
-      {/* Offer Section */}
-      <DealOffer />
+      {/* ================= DEALS BANNER ================= */}
 
-      {/* Deal Products */}
-      <DealProducts />
+      <main>
 
-      {/* Footer */}
+        <DealsBanner />
+
+
+        {/* ================= SPECIAL OFFER ================= */}
+
+        <DealOffer />
+
+
+        {/* ================= DEAL PRODUCTS ================= */}
+
+        <DealProducts />
+
+      </main>
+
+
+      {/* ================= FOOTER ================= */}
+
       <Footer />
-    </>
+
+    </div>
   );
 }
 

@@ -1,17 +1,18 @@
+
 import { useState } from "react";
 
 function ShopSidebar() {
   const [price, setPrice] = useState(150);
 
   const categories = [
-    "Electronics",
-    "Fashion",
-    "Home & Kitchen",
-    "Beauty",
-    "Sports",
-    "Toys",
-    "Automotive",
-    "Books",
+    { name: "Electronics", count: 18 },
+    { name: "Fashion", count: 15 },
+    { name: "Home & Kitchen", count: 12 },
+    { name: "Beauty", count: 9 },
+    { name: "Sports", count: 14 },
+    { name: "Toys", count: 8 },
+    { name: "Automotive", count: 11 },
+    { name: "Books", count: 7 },
   ];
 
   const brands = [
@@ -21,45 +22,46 @@ function ShopSidebar() {
     "Nike",
     "Adidas",
     "Puma",
-    " Wej",
+    "WEJ",
     "Dell",
-    " Hudabeauty",
-    "j.",
-
+    "Huda Beauty",
+    "J.",
   ];
 
   return (
     <aside className="w-full">
 
-      {/* Categories */}
-      <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-6">
+      {/* ================= CATEGORIES ================= */}
 
-        <h3 className="text-xl font-bold text-gray-800 mb-5">
+      <div className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-5 lg:p-6 mb-5">
+
+        <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-5">
           Categories
         </h3>
 
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
 
           {categories.map((item, index) => (
             <label
               key={index}
-              className="flex items-center justify-between cursor-pointer"
+              className="flex items-center justify-between gap-3 cursor-pointer group"
             >
-              <div className="flex items-center gap-3">
+
+              <div className="flex items-center gap-3 min-w-0">
 
                 <input
                   type="checkbox"
-                  className="accent-emerald-600"
+                  className="accent-emerald-600 w-4 h-4 flex-shrink-0 cursor-pointer"
                 />
 
-                <span className="text-gray-600">
-                  {item}
+                <span className="text-sm sm:text-base text-gray-600 group-hover:text-emerald-600 transition truncate">
+                  {item.name}
                 </span>
 
               </div>
 
-              <span className="text-gray-400 text-sm">
-                ({Math.floor(Math.random() * 20 + 5)})
+              <span className="text-gray-400 text-xs sm:text-sm flex-shrink-0">
+                ({item.count})
               </span>
 
             </label>
@@ -69,10 +71,12 @@ function ShopSidebar() {
 
       </div>
 
-      {/* Price */}
-      <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-6">
 
-        <h3 className="text-xl font-bold text-gray-800 mb-5">
+      {/* ================= PRICE RANGE ================= */}
+
+      <div className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-5 lg:p-6 mb-5">
+
+        <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-5">
           Price Range
         </h3>
 
@@ -81,13 +85,15 @@ function ShopSidebar() {
           min="0"
           max="300"
           value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          className="w-full accent-emerald-600"
+          onChange={(e) => setPrice(Number(e.target.value))}
+          className="w-full accent-emerald-600 cursor-pointer"
         />
 
-        <div className="flex justify-between mt-4 text-gray-600">
+        <div className="flex items-center justify-between mt-4 text-sm sm:text-base text-gray-600">
 
-          <span>$0</span>
+          <span>
+            $0
+          </span>
 
           <span className="font-semibold text-emerald-600">
             ${price}
@@ -97,28 +103,29 @@ function ShopSidebar() {
 
       </div>
 
-      {/* Brands */}
 
-      <div className="bg-white border border-gray-200 rounded-2xl p-6">
+      {/* ================= BRANDS ================= */}
 
-        <h3 className="text-xl font-bold text-gray-800 mb-5">
+      <div className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-5 lg:p-6">
+
+        <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-5">
           Brands
         </h3>
 
-        <div className="space-y-4">
+        <div className="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-4">
 
           {brands.map((brand, index) => (
             <label
               key={index}
-              className="flex items-center gap-3 cursor-pointer"
+              className="flex items-center gap-3 cursor-pointer group"
             >
 
               <input
                 type="checkbox"
-                className="accent-emerald-600"
+                className="accent-emerald-600 w-4 h-4 flex-shrink-0 cursor-pointer"
               />
 
-              <span className="text-gray-600">
+              <span className="text-sm sm:text-base text-gray-600 group-hover:text-emerald-600 transition truncate">
                 {brand}
               </span>
 

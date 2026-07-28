@@ -1,9 +1,4 @@
-import {
-  LuBadgeCheck,
-  LuBadgeDollarSign,
-  LuTruck,
-  LuShieldCheck,
-} from "react-icons/lu";
+
 import {
   FaMedal,
   FaTags,
@@ -36,38 +31,90 @@ function Services() {
   ];
 
   return (
-    <section className="py-6">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="py-5 sm:py-6">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 border border-gray-200 rounded-xl overflow-hidden">
+        <div className="
+          grid
+          grid-cols-1
+          xs:grid-cols-2
+          sm:grid-cols-2
+          lg:grid-cols-4
+          border
+          border-gray-200
+          rounded-xl
+          overflow-hidden
+        ">
 
           {services.map((item, index) => (
             <div
               key={index}
-              className={`flex items-center gap-4 p-6 bg-white hover:bg-gray-50 transition
-              ${
-                index !== services.length - 1
-                  ? "lg:border-r border-gray-200"
-                  : ""
-              }`}
+              className={`
+                flex
+                items-center
+                gap-3
+                sm:gap-4
+                p-4
+                sm:p-5
+                lg:p-6
+                bg-white
+                hover:bg-gray-50
+                transition
+
+                ${
+                  index !== services.length - 1
+                    ? "border-b border-gray-200 lg:border-b-0 lg:border-r"
+                    : ""
+                }
+
+                ${
+                  index === services.length - 2
+                    ? "sm:border-b-0 lg:border-b-0"
+                    : ""
+                }
+              `}
             >
+
               {/* Icon */}
-              <div className="text-2xl text-emerald-600 flex-shrink-0">
+
+              <div className="
+                text-xl
+                sm:text-2xl
+                text-emerald-600
+                flex-shrink-0
+              ">
                 {item.icon}
               </div>
 
               {/* Text */}
-              <div>
-                <h3 className="font-semibold text-gray-800 text-base">
+
+              <div className="min-w-0">
+
+                <h3 className="
+                  font-semibold
+                  text-gray-800
+                  text-sm
+                  sm:text-base
+                  truncate
+                ">
                   {item.title}
                 </h3>
 
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="
+                  text-xs
+                  sm:text-sm
+                  text-gray-500
+                  mt-1
+                  leading-5
+                ">
                   {item.desc}
                 </p>
+
               </div>
+
             </div>
           ))}
+
         </div>
 
       </div>

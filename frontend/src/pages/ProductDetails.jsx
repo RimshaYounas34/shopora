@@ -1,3 +1,4 @@
+
 import { useParams } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
@@ -17,7 +18,6 @@ import camera from "../assets/images/camera.jpg";
 import glasses from "../assets/images/glases.jpg";
 
 function ProductDetails() {
-
   const { id } = useParams();
 
   const products = [
@@ -113,17 +113,37 @@ function ProductDetails() {
     },
   ];
 
+  // ================= FIND PRODUCT =================
+
   const product = products.find(
     (item) => item.id === Number(id)
   );
 
+  // ================= PRODUCT NOT FOUND =================
+
   if (!product) {
     return (
-      <h2 className="text-center text-3xl font-bold py-20">
-        Product Not Found
-      </h2>
+      <>
+        <Navbar />
+
+        <section className="min-h-[60vh] flex items-center justify-center px-4">
+          <div className="text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
+              Product Not Found
+            </h2>
+
+            <p className="text-gray-500 mt-3">
+              The product you are looking for does not exist.
+            </p>
+          </div>
+        </section>
+
+        <Footer />
+      </>
     );
   }
+
+  // ================= RELATED PRODUCTS =================
 
   const relatedProducts = products.filter(
     (item) => item.id !== product.id
@@ -131,42 +151,72 @@ function ProductDetails() {
 
   return (
     <>
+      {/* ================= NAVBAR ================= */}
+
       <Navbar />
 
-      <section className="py-16 bg-gray-50">
+      {/* ================= PRODUCT DETAILS SECTION ================= */}
 
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="py-10 sm:py-14 lg:py-16 bg-gray-50">
 
-          {/* Product */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="grid lg:grid-cols-2 gap-16">
+          {/* ================= PRODUCT ================= */}
 
-            <ProductGallery product={product} />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16">
 
-            <ProductInfo product={product} />
+            {/* Product Gallery */}
+
+            <div className="w-full">
+              <ProductGallery product={product} />
+            </div>
+
+            {/* Product Information */}
+
+            <div className="w-full">
+              <ProductInfo product={product} />
+            </div>
 
           </div>
-                    {/* Tabs */}
 
-          <div className="bg-white rounded-2xl shadow-sm mt-16 p-8">
+          {/* ================= TABS ================= */}
 
-            <div className="flex gap-8 border-b pb-4">
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-sm mt-10 sm:mt-14 lg:mt-16 p-4 sm:p-6 lg:p-8">
 
-              <button className="font-semibold text-emerald-600 border-b-2 border-emerald-600 pb-3">
-                Description
-              </button>
+            {/* Tab Navigation */}
 
-              <button className="font-semibold text-gray-500 hover:text-emerald-600">
-                Additional Info
-              </button>
+            <div className="overflow-x-auto scrollbar-hide">
 
-              <button className="font-semibold text-gray-500 hover:text-emerald-600">
-                Reviews ({product.reviews})
-              </button>
+              <div className="flex min-w-max gap-6 sm:gap-8 border-b pb-3 sm:pb-4">
+
+                <button
+                  type="button"
+                  className="font-semibold text-emerald-600 border-b-2 border-emerald-600 pb-3 whitespace-nowrap text-sm sm:text-base"
+                >
+                  Description
+                </button>
+
+                <button
+                  type="button"
+                  className="font-semibold text-gray-500 hover:text-emerald-600 pb-3 whitespace-nowrap text-sm sm:text-base transition"
+                >
+                  Additional Info
+                </button>
+
+                <button
+                  type="button"
+                  className="font-semibold text-gray-500 hover:text-emerald-600 pb-3 whitespace-nowrap text-sm sm:text-base transition"
+                >
+                  Reviews ({product.reviews})
+                </button>
+
+              </div>
 
             </div>
 
-            <div className="mt-8 text-gray-600 leading-8">
+            {/* Tab Content */}
+
+            <div className="mt-6 sm:mt-8 text-gray-600 leading-7 sm:leading-8 text-sm sm:text-base">
 
               <p>
                 {product.title} is a premium quality product designed with
@@ -175,7 +225,7 @@ function ProductDetails() {
                 everyday use.
               </p>
 
-              <p className="mt-6">
+              <p className="mt-4 sm:mt-6">
                 Enjoy fast delivery, secure payments, and trusted quality.
                 Shop confidently with our premium collection and experience
                 outstanding value for your money.
@@ -185,25 +235,39 @@ function ProductDetails() {
 
           </div>
 
-          {/* Related Products */}
+          {/* ================= RELATED PRODUCTS ================= */}
 
-          <div className="mt-20">
+          <div className="mt-12 sm:mt-16 lg:mt-20">
 
-            <div className="flex justify-between items-center mb-8">
+            {/* Related Heading */}
 
-              <h2 className="text-3xl font-bold">
-                Related Products
-              </h2>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
+
+              <div>
+                <span className="text-emerald-600 font-semibold uppercase tracking-wider text-sm">
+                  You May Also Like
+                </span>
+
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mt-2">
+                  Related Products
+                </h2>
+              </div>
 
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Related Product Grid */}
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
 
               {relatedProducts.slice(0, 4).map((item) => (
-                <ProductCard
+
+                <div
                   key={item.id}
-                  product={item}
-                />
+                  className="w-full"
+                >
+                  <ProductCard product={item} />
+                </div>
+
               ))}
 
             </div>
@@ -213,6 +277,8 @@ function ProductDetails() {
         </div>
 
       </section>
+
+      {/* ================= FOOTER ================= */}
 
       <Footer />
 

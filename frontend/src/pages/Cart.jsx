@@ -14,23 +14,21 @@ function Cart() {
       <CartBanner />
 
       {/* Cart Section */}
-      <section className="bg-gray-50 py-16">
+      <section className="bg-gray-50 py-10 sm:py-12 md:py-16">
 
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
 
             {/* Cart Table */}
-
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 min-w-0">
 
               <CartTable />
 
             </div>
 
             {/* Cart Summary */}
-
-            <div>
+            <div className="w-full">
 
               <CartSummary />
 
@@ -43,9 +41,7 @@ function Cart() {
       </section>
 
       {/* Footer */}
-
       <Footer />
-
     </>
   );
 }
