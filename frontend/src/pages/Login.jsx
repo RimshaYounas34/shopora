@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -54,7 +55,7 @@ function Login() {
       // ================= SEND LOGIN REQUEST =================
 
       const response = await fetch(
-        "http://localhost:5000/api/auth/login",
+        "https://shopora-scs5.vercel.app/api/auth/login",
         {
           method: "POST",
 
@@ -86,11 +87,6 @@ function Login() {
 
       // ================= SAVE USER + TOKEN =================
 
-      // AuthContext will save:
-      // user
-      // token
-      // role
-
       login(
         data.user,
         data.token
@@ -104,7 +100,7 @@ function Login() {
       );
 
 
-      // Clear fields
+      // ================= CLEAR FIELDS =================
 
       setEmail("");
       setPassword("");
@@ -165,7 +161,7 @@ function Login() {
       // ================= SEND GOOGLE USER TO BACKEND =================
 
       const response = await fetch(
-        "http://localhost:5000/api/user/google",
+        "https://shopora-scs5.vercel.app/api/user/google",
         {
           method: "POST",
 
@@ -208,11 +204,6 @@ function Login() {
 
 
       // ================= SAVE GOOGLE USER + TOKEN =================
-
-      // AuthContext will save:
-      // user
-      // token
-      // role
 
       login(
         data.user,
