@@ -1,14 +1,13 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import {
-  FaEnvelope,
-  FaLock,
-  FaEye,
-  FaEyeSlash,
-  FaGoogle,
-  FaArrowRight,
+FaEnvelope,
+FaLock,
+FaEye,
+FaEyeSlash,
+FaGoogle,
+FaArrowRight,
 } from "react-icons/fa";
 
 import { HiShoppingBag } from "react-icons/hi2";
@@ -21,404 +20,359 @@ import { auth, provider } from "../helpers/firebase";
 import { useAuth } from "../context/AuthContext";
 
 function Login() {
-  const navigate = useNavigate();
+const navigate = useNavigate();
 
-  // ================= AUTH CONTEXT =================
+// ================= AUTH CONTEXT =================
 
-  const { login } = useAuth();
+const { login } = useAuth();
 
-  // ================= STATES =================
+// ================= API URL =================
 
-  const [showPassword, setShowPassword] = useState(false);
+const API_URL =
+import.meta.env.VITE_API_URL ||
+"http://localhost:5000";
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+// ================= STATES =================
 
-  const [loading, setLoading] = useState(false);
-  const [googleLoading, setGoogleLoading] = useState(false);
+const [showPassword, setShowPassword] = useState(false);
 
-  // ================= NORMAL LOGIN =================
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+const [loading, setLoading] = useState(false);
+const [googleLoading, setGoogleLoading] = useState(false);
 
-    if (!email || !password) {
-      toast.error("Please fill all fields.");
-      return;
+// ================= NORMAL LOGIN =================
+
+const handleLogin = async (e) => {
+e.preventDefault();
+
+
+if (!email.trim() || !password) {
+  toast.error("Please fill all fields.");
+  return;
+}
+
+try {
+  setLoading(true);
+
+  const response = await fetch(
+    `${API_URL}/api/auth/login`,
+    {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({
+        email: email.trim().toLowerCase(),
+        password,
+      }),
     }
+  );
 
-    try {
-      setLoading(true);
+  const contentType =
+    response.headers.get("content-type");
 
-      const response = await fetch(
-        "http://localhost:5000/api/auth/login",
-        {
-          method: "POST",
+  if (
+    !contentType ||
+    !contentType.includes("application/json")
+  ) {
+    throw new Error(
+      "Server returned an invalid response."
+    );
+  }
 
-          headers: {
-            "Content-Type": "application/json",
-          },
+  const data = await response.json();
 
-          body: JSON.stringify({
-            email: email.trim().toLowerCase(),
-            password,
-          }),
-        }
-      );
+  if (!response.ok) {
+    toast.error(
+      data.message ||
+        "Invalid email or password."
+    );
+    return;
+  }
 
-      const data = await response.json();
+  login(data.user, data.token);
 
-      if (!response.ok) {
-        toast.error(data.message || "Invalid email or password.");
-        return;
-      }
+  toast.success("Login Successful! 🎉");
 
-      login(data.user, data.token);
+  setEmail("");
+  setPassword("");
 
-      toast.success("Login Successful! 🎉");
+  setTimeout(() => {
+    navigate("/");
+  }, 1200);
 
-      setEmail("");
-      setPassword("");
+} catch (error) {
+  console.error("Login Error:", error);
 
-      setTimeout(() => {
-        navigate("/");
-      }, 1500);
-    } catch (error) {
-      console.error("Login Error:", error);
+  if (
+    error.message?.includes(
+      "Server returned an invalid response"
+    )
+  ) {
+    toast.error(
+      "Backend API is not responding correctly."
+    );
+  } else if (
+    error.message?.includes("Failed to fetch")
+  ) {
+    toast.error(
+      "Unable to connect with backend server."
+    );
+  } else {
+    toast.error(
+      "Unable to login. Please try again."
+    );
+  }
 
-      toast.error(
-        "Unable to connect with local server. Please make sure backend is running."
-      );
-    } finally {
-      setLoading(false);
+} finally {
+  setLoading(false);
+}
+
+
+};
+
+// ================= GOOGLE LOGIN =================
+
+const handleGoogleLogin = async () => {
+try {
+setGoogleLoading(true);
+
+
+  // Firebase Google Authentication
+  const result = await signInWithPopup(
+    auth,
+    provider
+  );
+
+  const googleUser = result.user;
+
+  console.log("Google User:", googleUser);
+
+  // Send Google user to backend
+  // IMPORTANT:
+  // Backend route is /api/users/google
+  const response = await fetch(
+    `${API_URL}/api/users/google`,
+    {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({
+        name:
+          googleUser.displayName ||
+          "Google User",
+
+        email:
+          googleUser.email,
+
+        image:
+          googleUser.photoURL || "",
+      }),
     }
-  };
+  );
 
-  // ================= GOOGLE LOGIN =================
+  // ================= RESPONSE CHECK =================
 
-  const handleGoogleLogin = async () => {
-    try {
-      setGoogleLoading(true);
+  const contentType =
+    response.headers.get("content-type");
 
-      const result = await signInWithPopup(auth, provider);
+  if (
+    !contentType ||
+    !contentType.includes("application/json")
+  ) {
+    throw new Error(
+      "Server returned an invalid response."
+    );
+  }
 
-      const googleUser = result.user;
+  const data = await response.json();
 
-      console.log("Google User:", googleUser);
+  // ================= BACKEND ERROR =================
 
-      const response = await fetch(
-        "http://localhost:5000/api/user/google",
-        {
-          method: "POST",
+  if (!response.ok) {
+    toast.error(
+      data.message ||
+        "Google login failed."
+    );
+    return;
+  }
 
-          headers: {
-            "Content-Type": "application/json",
-          },
+  // ================= SAVE LOGIN =================
 
-          body: JSON.stringify({
-            name: googleUser.displayName || "Google User",
-            email: googleUser.email,
-            image: googleUser.photoURL || "",
-          }),
-        }
-      );
+  login(
+    data.user,
+    data.token
+  );
 
-      const data = await response.json();
+  toast.success(
+    "Google Login Successful! 🎉"
+  );
 
-      if (!response.ok) {
-        toast.error(data.message || "Google login failed.");
-        return;
-      }
+  setTimeout(() => {
+    navigate("/");
+  }, 1200);
 
-      login(data.user, data.token);
+} catch (error) {
+  console.error(
+    "Google Login Error:",
+    error
+  );
 
-      toast.success("Google Login Successful! 🎉");
+  // ================= FIREBASE ERRORS =================
 
-      setTimeout(() => {
-        navigate("/");
-      }, 1500);
-    } catch (error) {
-      console.error("Google Login Error:", error);
+  if (
+    error.code ===
+    "auth/popup-closed-by-user"
+  ) {
+    toast.error(
+      "Google login popup was closed."
+    );
 
-      if (error.code === "auth/popup-closed-by-user") {
-        toast.error("Google login popup was closed.");
-      } else if (error.code === "auth/popup-blocked") {
-        toast.error(
-          "Google popup was blocked. Please allow popups."
-        );
-      } else if (error.code === "auth/unauthorized-domain") {
-        toast.error(
-          "This domain is not authorized in Firebase."
-        );
-      } else if (error.message?.includes("Failed to fetch")) {
-        toast.error(
-          "Unable to connect with local backend. Make sure backend is running on port 5000."
-        );
-      } else {
-        toast.error(
-          "Google login failed. Please try again."
-        );
-      }
-    } finally {
-      setGoogleLoading(false);
-    }
-  };
+  } else if (
+    error.code ===
+    "auth/popup-blocked"
+  ) {
+    toast.error(
+      "Google popup was blocked. Please allow popups."
+    );
 
-  // ================= UI =================
+  } else if (
+    error.code ===
+    "auth/unauthorized-domain"
+  ) {
+    toast.error(
+      "This domain is not authorized in Firebase."
+    );
 
-  return (
-    <section className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-6 sm:py-10">
+  } else if (
+    error.code ===
+    "auth/operation-not-allowed"
+  ) {
+    toast.error(
+      "Google Sign-In is not enabled in Firebase."
+    );
 
-      <div className="w-full max-w-6xl bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-2">
+  // ================= BACKEND ERRORS =================
 
-        {/* ================= LEFT SIDE ================= */}
+  } else if (
+    error.message?.includes(
+      "Server returned an invalid response"
+    )
+  ) {
+    toast.error(
+      "Backend API is not responding correctly."
+    );
 
-        <div className="bg-gradient-to-br from-emerald-600 via-green-600 to-emerald-700 text-white p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-between gap-10 lg:gap-0">
+  } else if (
+    error.message?.includes(
+      "Failed to fetch"
+    )
+  ) {
+    toast.error(
+      "Unable to connect with backend server."
+    );
 
-          {/* ================= LOGO ================= */}
+  } else {
+    toast.error(
+      "Google login failed. Please try again."
+    );
+  }
 
-          <div>
-            <div className="flex items-center gap-3 sm:gap-4">
+} finally {
+  setGoogleLoading(false);
+}
 
-              <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl sm:rounded-2xl bg-white flex items-center justify-center shadow-xl shrink-0">
-                <HiShoppingBag className="text-emerald-600 text-3xl sm:text-4xl" />
-              </div>
 
-              <div>
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold">
-                  Shopora
-                </h1>
+};
 
-                <p className="uppercase tracking-[3px] sm:tracking-[5px] lg:tracking-[6px] text-[10px] sm:text-xs lg:text-sm text-green-100">
-                  Online Store
-                </p>
-              </div>
+// ================= UI =================
 
-            </div>
+return ( <section className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-6 sm:py-10">
+
+
+  <div className="w-full max-w-6xl bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-2">
+
+    {/* ================= LEFT SIDE ================= */}
+
+    <div className="bg-gradient-to-br from-emerald-600 via-green-600 to-emerald-700 text-white p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-between gap-10 lg:gap-0">
+
+      {/* ================= LOGO ================= */}
+
+      <div>
+        <div className="flex items-center gap-3 sm:gap-4">
+
+          <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl sm:rounded-2xl bg-white flex items-center justify-center shadow-xl shrink-0">
+
+            <HiShoppingBag className="text-emerald-600 text-3xl sm:text-4xl" />
+
           </div>
 
-          {/* ================= WELCOME CONTENT ================= */}
-
           <div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
-              Welcome
-              <br />
-              Back 👋
-            </h2>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold">
+              Shopora
+            </h1>
 
-            <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-7 sm:leading-8 text-green-100 max-w-xl">
-              Login to continue shopping premium products with
-              exclusive discounts, secure checkout and fast delivery.
+            <p className="uppercase tracking-[3px] sm:tracking-[5px] lg:tracking-[6px] text-[10px] sm:text-xs lg:text-sm text-green-100">
+              Online Store
             </p>
-
-            <div className="mt-7 sm:mt-10 space-y-4 sm:space-y-5">
-
-              <div className="flex items-center gap-3">
-                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white shrink-0"></div>
-                <span>Premium Products</span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white shrink-0"></div>
-                <span>Fast Delivery</span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white shrink-0"></div>
-                <span>Secure Payments</span>
-              </div>
-
-            </div>
-
-          </div>
-
-          {/* ================= TESTIMONIAL ================= */}
-
-          <div className="bg-white/10 backdrop-blur rounded-xl sm:rounded-2xl p-4 sm:p-6">
-
-            <p className="italic text-sm sm:text-base">
-              "Shop smarter with thousands of quality products at unbeatable prices."
-            </p>
-
-            <div className="flex items-center gap-3 mt-4 sm:mt-5">
-
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-emerald-600 font-bold flex items-center justify-center shrink-0">
-                S
-              </div>
-
-              <div>
-                <h3 className="font-semibold">
-                  Sarah Johnson
-                </h3>
-
-                <p className="text-xs sm:text-sm text-green-100">
-                  Happy Customer
-                </p>
-              </div>
-
-            </div>
 
           </div>
 
         </div>
+      </div>
 
-        {/* ================= RIGHT SIDE ================= */}
+      {/* ================= WELCOME CONTENT ================= */}
 
-        <div className="flex items-center justify-center p-5 sm:p-8 md:p-10 lg:p-12">
+      <div>
 
-          <div className="w-full max-w-md">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+          Welcome
+          <br />
+          Back 👋
+        </h2>
 
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
-              Sign In
-            </h2>
+        <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-7 sm:leading-8 text-green-100 max-w-xl">
+          Login to continue shopping premium products with
+          exclusive discounts, secure checkout and fast delivery.
+        </p>
 
-            <p className="text-gray-500 mt-2 sm:mt-3 text-sm sm:text-base">
-              Login to access your Shopora account.
-            </p>
+        <div className="mt-7 sm:mt-10 space-y-4 sm:space-y-5">
 
-            {/* ================= LOGIN FORM ================= */}
+          <div className="flex items-center gap-3">
 
-            <form onSubmit={handleLogin}>
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white shrink-0"></div>
 
-              {/* ================= EMAIL ================= */}
+            <span>
+              Premium Products
+            </span>
 
-              <div className="mt-6 sm:mt-8">
+          </div>
 
-                <label className="font-medium text-sm sm:text-base">
-                  Email Address
-                </label>
+          <div className="flex items-center gap-3">
 
-                <div className="relative mt-2">
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white shrink-0"></div>
 
-                  <FaEnvelope className="absolute left-4 sm:left-5 top-1/2 -translate-y-1/2 text-gray-400" />
+            <span>
+              Fast Delivery
+            </span>
 
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    disabled={loading || googleLoading}
-                    className="w-full h-12 sm:h-14 rounded-xl border border-gray-300 pl-12 sm:pl-14 pr-4 text-sm sm:text-base outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 disabled:bg-gray-100"
-                  />
+          </div>
 
-                </div>
+          <div className="flex items-center gap-3">
 
-              </div>
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white shrink-0"></div>
 
-              {/* ================= PASSWORD ================= */}
-
-              <div className="mt-5 sm:mt-6">
-
-                <label className="font-medium text-sm sm:text-base">
-                  Password
-                </label>
-
-                <div className="relative mt-2">
-
-                  <FaLock className="absolute left-4 sm:left-5 top-1/2 -translate-y-1/2 text-gray-400" />
-
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter your password"
-                    disabled={loading || googleLoading}
-                    className="w-full h-12 sm:h-14 rounded-xl border border-gray-300 pl-12 sm:pl-14 pr-12 sm:pr-14 text-sm sm:text-base outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 disabled:bg-gray-100"
-                  />
-
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    disabled={loading || googleLoading}
-                    className="absolute right-4 sm:right-5 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
-                  >
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
-                  </button>
-
-                </div>
-
-              </div>
-
-              {/* ================= REMEMBER & FORGOT ================= */}
-
-              <div className="flex flex-col xs:flex-row sm:flex-row items-start sm:items-center justify-between gap-3 mt-5 sm:mt-6">
-
-                <label className="flex items-center gap-2 text-sm sm:text-base text-gray-600 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    className="accent-emerald-600 cursor-pointer"
-                  />
-                  Remember Me
-                </label>
-
-                <button
-                  type="button"
-                  className="text-emerald-600 hover:underline font-medium text-sm sm:text-base cursor-pointer"
-                >
-                  Forgot Password?
-                </button>
-
-              </div>
-
-              {/* ================= SIGN IN BUTTON ================= */}
-
-              <button
-                type="submit"
-                disabled={loading || googleLoading}
-                className="w-full h-12 sm:h-14 mt-6 sm:mt-8 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 text-white font-semibold flex items-center justify-center gap-3 transition cursor-pointer disabled:cursor-not-allowed"
-              >
-                {loading ? "Signing In..." : "Sign In"}
-
-                {!loading && <FaArrowRight />}
-              </button>
-
-            </form>
-
-            {/* ================= CREATE ACCOUNT ================= */}
-
-            <p className="text-center mt-5 sm:mt-6 text-sm sm:text-base text-gray-600">
-              Don't have an account?{" "}
-
-              <Link
-                to="/register"
-                className="text-emerald-600 font-semibold hover:underline cursor-pointer"
-              >
-                Create Account
-              </Link>
-            </p>
-
-            {/* ================= DIVIDER ================= */}
-
-            <div className="flex items-center my-6 sm:my-8">
-
-              <div className="flex-1 h-px bg-gray-300"></div>
-
-              <span className="mx-3 sm:mx-4 text-gray-500 font-medium text-sm">
-                OR
-              </span>
-
-              <div className="flex-1 h-px bg-gray-300"></div>
-
-            </div>
-
-            {/* ================= GOOGLE LOGIN ================= */}
-
-            <button
-              type="button"
-              onClick={handleGoogleLogin}
-              disabled={loading || googleLoading}
-              className="w-full h-12 sm:h-14 rounded-xl border border-gray-300 hover:bg-gray-50 disabled:bg-gray-100 transition flex items-center justify-center gap-3 cursor-pointer disabled:cursor-not-allowed text-sm sm:text-base"
-            >
-
-              <FaGoogle className="text-red-500 text-lg sm:text-xl" />
-
-              {googleLoading
-                ? "Connecting with Google..."
-                : "Continue with Google"
-              }
-
-            </button>
+            <span>
+              Secure Payments
+            </span>
 
           </div>
 
@@ -426,8 +380,247 @@ function Login() {
 
       </div>
 
-    </section>
-  );
+      {/* ================= TESTIMONIAL ================= */}
+
+      <div className="bg-white/10 backdrop-blur rounded-xl sm:rounded-2xl p-4 sm:p-6">
+
+        <p className="italic text-sm sm:text-base">
+          "Shop smarter with thousands of quality products at unbeatable prices."
+        </p>
+
+        <div className="flex items-center gap-3 mt-4 sm:mt-5">
+
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-emerald-600 font-bold flex items-center justify-center shrink-0">
+            S
+          </div>
+
+          <div>
+
+            <h3 className="font-semibold">
+              Sarah Johnson
+            </h3>
+
+            <p className="text-xs sm:text-sm text-green-100">
+              Happy Customer
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    {/* ================= RIGHT SIDE ================= */}
+
+    <div className="flex items-center justify-center p-5 sm:p-8 md:p-10 lg:p-12">
+
+      <div className="w-full max-w-md">
+
+        <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
+          Sign In
+        </h2>
+
+        <p className="text-gray-500 mt-2 sm:mt-3 text-sm sm:text-base">
+          Login to access your Shopora account.
+        </p>
+
+        {/* ================= LOGIN FORM ================= */}
+
+        <form onSubmit={handleLogin}>
+
+          {/* ================= EMAIL ================= */}
+
+          <div className="mt-6 sm:mt-8">
+
+            <label className="font-medium text-sm sm:text-base">
+              Email Address
+            </label>
+
+            <div className="relative mt-2">
+
+              <FaEnvelope className="absolute left-4 sm:left-5 top-1/2 -translate-y-1/2 text-gray-400" />
+
+              <input
+                type="email"
+                value={email}
+                onChange={(e) =>
+                  setEmail(e.target.value)
+                }
+                placeholder="Enter your email"
+                disabled={
+                  loading ||
+                  googleLoading
+                }
+                className="w-full h-12 sm:h-14 rounded-xl border border-gray-300 pl-12 sm:pl-14 pr-4 text-sm sm:text-base outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 disabled:bg-gray-100"
+              />
+
+            </div>
+
+          </div>
+
+          {/* ================= PASSWORD ================= */}
+
+          <div className="mt-5 sm:mt-6">
+
+            <label className="font-medium text-sm sm:text-base">
+              Password
+            </label>
+
+            <div className="relative mt-2">
+
+              <FaLock className="absolute left-4 sm:left-5 top-1/2 -translate-y-1/2 text-gray-400" />
+
+              <input
+                type={
+                  showPassword
+                    ? "text"
+                    : "password"
+                }
+                value={password}
+                onChange={(e) =>
+                  setPassword(
+                    e.target.value
+                  )
+                }
+                placeholder="Enter your password"
+                disabled={
+                  loading ||
+                  googleLoading
+                }
+                className="w-full h-12 sm:h-14 rounded-xl border border-gray-300 pl-12 sm:pl-14 pr-12 sm:pr-14 text-sm sm:text-base outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 disabled:bg-gray-100"
+              />
+
+              <button
+                type="button"
+                onClick={() =>
+                  setShowPassword(
+                    !showPassword
+                  )
+                }
+                disabled={
+                  loading ||
+                  googleLoading
+                }
+                className="absolute right-4 sm:right-5 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
+              >
+                {showPassword ? (
+                  <FaEyeSlash />
+                ) : (
+                  <FaEye />
+                )}
+              </button>
+
+            </div>
+
+          </div>
+
+          {/* ================= REMEMBER / FORGOT ================= */}
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-5 sm:mt-6">
+
+            <label className="flex items-center gap-2 text-sm sm:text-base text-gray-600 cursor-pointer">
+
+              <input
+                type="checkbox"
+                className="accent-emerald-600 cursor-pointer"
+              />
+
+              Remember Me
+
+            </label>
+
+            <button
+              type="button"
+              className="text-emerald-600 hover:underline font-medium text-sm sm:text-base cursor-pointer"
+            >
+              Forgot Password?
+            </button>
+
+          </div>
+
+          {/* ================= SIGN IN ================= */}
+
+          <button
+            type="submit"
+            disabled={
+              loading ||
+              googleLoading
+            }
+            className="w-full h-12 sm:h-14 mt-6 sm:mt-8 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 text-white font-semibold flex items-center justify-center gap-3 transition cursor-pointer disabled:cursor-not-allowed"
+          >
+
+            {loading
+              ? "Signing In..."
+              : "Sign In"}
+
+            {!loading && (
+              <FaArrowRight />
+            )}
+
+          </button>
+
+        </form>
+
+        {/* ================= CREATE ACCOUNT ================= */}
+
+        <p className="text-center mt-5 sm:mt-6 text-sm sm:text-base text-gray-600">
+
+          Don't have an account?{" "}
+
+          <Link
+            to="/register"
+            className="text-emerald-600 font-semibold hover:underline cursor-pointer"
+          >
+            Create Account
+          </Link>
+
+        </p>
+
+        {/* ================= DIVIDER ================= */}
+
+        <div className="flex items-center my-6 sm:my-8">
+
+          <div className="flex-1 h-px bg-gray-300"></div>
+
+          <span className="mx-3 sm:mx-4 text-gray-500 font-medium text-sm">
+            OR
+          </span>
+
+          <div className="flex-1 h-px bg-gray-300"></div>
+
+        </div>
+
+        {/* ================= GOOGLE LOGIN ================= */}
+
+        <button
+          type="button"
+          onClick={handleGoogleLogin}
+          disabled={
+            loading ||
+            googleLoading
+          }
+          className="w-full h-12 sm:h-14 rounded-xl border border-gray-300 hover:bg-gray-50 disabled:bg-gray-100 transition flex items-center justify-center gap-3 cursor-pointer disabled:cursor-not-allowed text-sm sm:text-base"
+        >
+
+          <FaGoogle className="text-red-500 text-lg sm:text-xl" />
+
+          {googleLoading
+            ? "Connecting with Google..."
+            : "Continue with Google"}
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+);
 }
 
 export default Login;
