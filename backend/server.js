@@ -26,18 +26,16 @@ credentials: true,
 
 app.use(express.json());
 
-// ================= MONGODB CONNECTION =================
+// ================= MONGODB =================
 
 mongoose
 .connect(process.env.MONGO_URI)
-.then(() => {
-console.log("MongoDB Connected");
-})
-.catch((error) => {
-console.error("MongoDB Connection Error:", error);
-});
+.then(() => console.log("MongoDB Connected"))
+.catch((error) =>
+console.error("MongoDB Connection Error:", error)
+);
 
-// ================= TEST ROUTE =================
+// ================= TEST =================
 
 app.get("/", (req, res) => {
 res.status(200).send("Backend Running...");
@@ -57,7 +55,7 @@ app.use("/api/product-request", productRequestRoutes);
 
 app.use("/api/orders", orderRoutes);
 
-// ================= 404 HANDLER =================
+// ================= 404 =================
 
 app.use((req, res) => {
 res.status(404).json({
@@ -66,7 +64,7 @@ message: `Route not found: ${req.method} ${req.originalUrl}`,
 });
 });
 
-// ================= ERROR HANDLER =================
+// ================= ERROR =================
 
 app.use((err, req, res, next) => {
 console.error("Server Error:", err);
@@ -77,18 +75,6 @@ message: "Internal server error",
 });
 });
 
-// ================= LOCAL SERVER =================
-
-// Localhost par server normally chalega.
-// Vercel par app export hoga.
-if (process.env.NODE_ENV !== "production") {
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-console.log(`Server running on port ${PORT}`);
-});
-}
-
-// ================= VERCEL EXPORT =================
+// ================= EXPORT =================
 
 module.exports = app;
