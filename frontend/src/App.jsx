@@ -1,4 +1,3 @@
-
 import { Routes, Route } from "react-router-dom";
 
 // ================= PUBLIC / MAIN PAGES =================
@@ -56,253 +55,250 @@ import WatchVideo from "./pages/WatchVideo";
 
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminOrders from "./pages/AdminOrders";
-
+import AdminUsers from "./pages/AdminUsers";
+import AdminContacts from "./pages/AdminContacts";
+import AdminNewsletters from "./pages/AdminNewsletters";
+import AdminProductRequests from "./pages/AdminProductRequests";
 
 function App() {
-  return (
-    <>
-      {/* Scroll to top whenever page changes */}
-      <ScrollToTop />
+return (
+<> <ScrollToTop />
 
-      <Routes>
+  <Routes>
 
-        {/* ================================================= */}
-        {/* PUBLIC ROUTES - EVERYONE CAN ACCESS */}
-        {/* ================================================= */}
+    {/* ================================================= */}
+    {/* PUBLIC ROUTES */}
+    {/* ================================================= */}
 
-        {/* Home */}
-        <Route
-          path="/"
-          element={<Home />}
-        />
+    <Route
+      path="/"
+      element={<Home />}
+    />
 
-        {/* Login */}
-        <Route
-          path="/login"
-          element={<Login />}
-        />
+    <Route
+      path="/login"
+      element={<Login />}
+    />
 
-        {/* Register */}
-        <Route
-          path="/register"
-          element={<Register />}
-        />
+    <Route
+      path="/register"
+      element={<Register />}
+    />
 
-        {/* Watch Video */}
-        <Route
-          path="/watch-video"
-          element={<WatchVideo />}
-        />
+    <Route
+      path="/watch-video"
+      element={<WatchVideo />}
+    />
 
 
-        {/* ================================================= */}
-        {/* PROTECTED ROUTES - LOGIN REQUIRED */}
-        {/* ================================================= */}
+    {/* ================================================= */}
+    {/* PROTECTED ROUTES */}
+    {/* ================================================= */}
 
-        <Route element={<ProtectedRoute />}>
+    <Route element={<ProtectedRoute />}>
 
-          {/* ================= SHOP ================= */}
+      {/* ================= SHOP ================= */}
 
-          <Route
-            path="/shop"
-            element={<Shop />}
-          />
+      <Route
+        path="/shop"
+        element={<Shop />}
+      />
 
+      <Route
+        path="/best-sellers"
+        element={<BestSellers />}
+      />
 
-          {/* ================= FEATURED PRODUCT PAGES ================= */}
+      <Route
+        path="/top-rated"
+        element={<TopRated />}
+      />
 
-          {/* All Products */}
-          <Route
-            path="/shop"
-            element={<Shop />}
-          />
-
-          {/* Best Sellers */}
-          <Route
-            path="/best-sellers"
-            element={<BestSellers />}
-          />
-
-          {/* Top Rated */}
-          <Route
-            path="/top-rated"
-            element={<TopRated />}
-          />
-
-          {/* New Arrivals */}
-          <Route
-            path="/new-arrivals"
-            element={<NewArrivals />}
-          />
+      <Route
+        path="/new-arrivals"
+        element={<NewArrivals />}
+      />
 
 
-          {/* Product Details */}
-          <Route
-            path="/product/:id"
-            element={<ProductDetails />}
-          />
+      {/* ================= PRODUCT ================= */}
 
-          {/* Categories */}
-          <Route
-            path="/categories"
-            element={<Categories />}
-          />
+      <Route
+        path="/product/:id"
+        element={<ProductDetails />}
+      />
 
-
-          {/* ================= CATEGORY PAGES ================= */}
-
-          {/* Electronics */}
-          <Route
-            path="/electronics"
-            element={<Electronics />}
-          />
-
-          {/* Fashion */}
-          <Route
-            path="/fashion"
-            element={<Fashion />}
-          />
-
-          {/* Furniture */}
-          <Route
-            path="/furniture"
-            element={<Furniture />}
-          />
-
-          {/* Mobiles */}
-          <Route
-            path="/mobiles"
-            element={<Mobiles />}
-          />
-
-          {/* Gaming */}
-          <Route
-            path="/gaming"
-            element={<Gaming />}
-          />
-
-          {/* Bags */}
-          <Route
-            path="/bags"
-            element={<Bags />}
-          />
-
-          {/* Jewellery */}
-          <Route
-            path="/jewellery"
-            element={<Jewellery />}
-          />
-
-          {/* Sports */}
-          <Route
-            path="/sports"
-            element={<Sports />}
-          />
-
-          {/* Beauty */}
-          <Route
-            path="/beauty"
-            element={<Beauty />}
-          />
-
-          {/* Groceries */}
-          <Route
-            path="/groceries"
-            element={<Groceries />}
-          />
-
-          {/* Watches */}
-          <Route
-            path="/watches"
-            element={<Watches />}
-          />
-
-          {/* Shoes */}
-          <Route
-            path="/shoes"
-            element={<Shoes />}
-          />
+      <Route
+        path="/categories"
+        element={<Categories />}
+      />
 
 
-          {/* ================= SHOPPING ROUTES ================= */}
+      {/* ================= CATEGORY PAGES ================= */}
 
-          {/* Cart */}
-          <Route
-            path="/cart"
-            element={<Cart />}
-          />
+      <Route
+        path="/electronics"
+        element={<Electronics />}
+      />
 
-          {/* Wishlist */}
-          <Route
-            path="/wishlist"
-            element={<Wishlist />}
-          />
+      <Route
+        path="/fashion"
+        element={<Fashion />}
+      />
 
-          {/* Checkout */}
-          <Route
-            path="/checkout"
-            element={<Checkout />}
-          />
+      <Route
+        path="/furniture"
+        element={<Furniture />}
+      />
 
-          {/* Order Success */}
-          <Route
-            path="/order-success/:orderId"
-            element={<OrderSuccess />}
-          />
+      <Route
+        path="/mobiles"
+        element={<Mobiles />}
+      />
+
+      <Route
+        path="/gaming"
+        element={<Gaming />}
+      />
+
+      <Route
+        path="/bags"
+        element={<Bags />}
+      />
+
+      <Route
+        path="/jewellery"
+        element={<Jewellery />}
+      />
+
+      <Route
+        path="/sports"
+        element={<Sports />}
+      />
+
+      <Route
+        path="/beauty"
+        element={<Beauty />}
+      />
+
+      <Route
+        path="/groceries"
+        element={<Groceries />}
+      />
+
+      <Route
+        path="/watches"
+        element={<Watches />}
+      />
+
+      <Route
+        path="/shoes"
+        element={<Shoes />}
+      />
 
 
-          {/* ================= OTHER PAGES ================= */}
+      {/* ================= SHOPPING ================= */}
 
-          {/* Deals */}
-          <Route
-            path="/deals"
-            element={<Deals />}
-          />
+      <Route
+        path="/cart"
+        element={<Cart />}
+      />
 
-          {/* Blog Main Page */}
-          <Route
-            path="/blog"
-            element={<Blog />}
-          />
+      <Route
+        path="/wishlist"
+        element={<Wishlist />}
+      />
 
-          {/* Blog Details Page */}
-          <Route
-            path="/blog/:id"
-            element={<BlogDetails />}
-          />
+      <Route
+        path="/checkout"
+        element={<Checkout />}
+      />
 
-          {/* Contact */}
-          <Route
-            path="/contact"
-            element={<Contact />}
-          />
-
-        </Route>
+      <Route
+        path="/order-success/:orderId"
+        element={<OrderSuccess />}
+      />
 
 
-        {/* ================================================= */}
-        {/* ADMIN ROUTES - ADMIN ONLY */}
-        {/* ================================================= */}
+      {/* ================= OTHER PAGES ================= */}
 
-        <Route element={<AdminRoute />}>
+      <Route
+        path="/deals"
+        element={<Deals />}
+      />
 
-          {/* Admin Dashboard */}
-          <Route
-            path="/admin"
-            element={<AdminDashboard />}
-          />
+      <Route
+        path="/blog"
+        element={<Blog />}
+      />
 
-          {/* Admin Orders */}
-          <Route
-            path="/admin/orders"
-            element={<AdminOrders />}
-          />
+      <Route
+        path="/blog/:id"
+        element={<BlogDetails />}
+      />
 
-        </Route>
+      <Route
+        path="/contact"
+        element={<Contact />}
+      />
 
-      </Routes>
-    </>
-  );
+    </Route>
+
+
+    {/* ================================================= */}
+    {/* ADMIN ROUTES - ADMIN ONLY */}
+    {/* ================================================= */}
+
+    <Route element={<AdminRoute />}>
+
+      {/* Dashboard */}
+
+      <Route
+        path="/admin"
+        element={<AdminDashboard />}
+      />
+
+      {/* Orders */}
+
+      <Route
+        path="/admin/orders"
+        element={<AdminOrders />}
+      />
+
+      {/* Users */}
+
+      <Route
+        path="/admin/users"
+        element={<AdminUsers />}
+      />
+
+      {/* Contact Messages */}
+
+      <Route
+        path="/admin/contacts"
+        element={<AdminContacts />}
+      />
+
+      {/* Newsletter Subscribers */}
+
+      <Route
+        path="/admin/newsletters"
+        element={<AdminNewsletters />}
+      />
+
+      {/* Product Requests */}
+
+      <Route
+        path="/admin/product-requests"
+        element={<AdminProductRequests />}
+      />
+
+    </Route>
+
+  </Routes>
+</>
+
+
+);
 }
 
 export default App;

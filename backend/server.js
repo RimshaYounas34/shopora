@@ -24,7 +24,7 @@ app.use(express.json());
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.log(err));
+  .catch((err) => console.log("MongoDB Connection Error:", err));
 
 
 // ================= TEST ROUTE =================
@@ -40,13 +40,14 @@ app.use("/api/contact", contactRoutes);
 
 app.use("/api/auth", authRoutes);
 
-app.use("/api/user", userRoutes);
+// USERS
+app.use("/api/users", userRoutes);
 
 app.use("/api/newsletter", newsletterRoutes);
 
 app.use("/api/product-request", productRequestRoutes);
 
-// Orders
+// ORDERS
 app.use("/api/orders", orderRoutes);
 
 

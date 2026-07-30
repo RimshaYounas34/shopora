@@ -80,6 +80,40 @@ const googleLogin = async (req, res) => {
   }
 };
 
+
+// ================= GET ALL USERS =================
+
+const getUsers = async (req, res) => {
+  try {
+    // Only normal registered users
+    // Admin account will not be counted
+    const users = await User.find({
+      role: "user",
+    })
+      .select("-password")
+      .sort({
+        createdAt: -1,
+      });
+
+    res.status(200).json({
+      success: true,
+      users,
+    });
+
+  } catch (error) {
+    console.error("Get Users Error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch users.",
+    });
+  }
+};
+
+
+// ================= EXPORT =================
+
 module.exports = {
   googleLogin,
+  getUsers,
 };
