@@ -1,3 +1,4 @@
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -14,34 +15,16 @@ const app = express();
 
 // ================= MIDDLEWARE =================
 
-app.use(express.json());
-
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:5174",
-      "https://shopora-seven-tau.vercel.app",
-      "https://shopra-online-store.web.app",
-    ],
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    origin: true,
     credentials: true,
   })
 );
 
-// ================= DATABASE =================
+app.use(express.json());
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log("MongoDB Connected");
-  })
-  .catch((error) => {
-    console.error("MongoDB Connection Error:", error);
-  });
-
-// ================= TEST =================
+// ================= TEST ROUTE =================
 
 app.get("/", (req, res) => {
   res.status(200).json({
@@ -64,25 +47,16 @@ app.use("/api/product-request", productRequestRoutes);
 
 app.use("/api/orders", orderRoutes);
 
-// ================= API TEST =================
-
-app.get("/api/test", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "API routes are working!",
-  });
-});
-
-// ================= 404 =================
+// ================= 404 ROUTE =================
 
 app.use((req, res) => {
   res.status(404).json({
     success: false,
-    message: `Cannot ${req.method} ${req.originalUrl}`,
+    message: `Route not found: ${req.method} ${req.originalUrl}`,
   });
 });
 
-// ================= ERROR =================
+// ================= ERROR HANDLER =================
 
 app.use((err, req, res, next) => {
   console.error("Server Error:", err);
@@ -93,6 +67,29 @@ app.use((err, req, res, next) => {
   });
 });
 
-// ================= EXPORT =================
+// ================= MONGODB + SERVER =================
 
-module.exports = app;
+const PORT = process.env.PORT || 5000;
+
+const startServer = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+
+    console.log("MongoDB Connected");
+
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+
+  } catch (error) {
+    console.error(
+      "MongoDB Connection Error:",
+      error.message
+    );
+
+    process.exit(1);
+  }
+};
+
+startServer();
+
